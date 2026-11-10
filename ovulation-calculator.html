@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ovulation Calculator — Ovulation Day and Fertile Window | Baby Tools</title>
+<meta name="description" content="Free ovulation calculator. Enter the first day of your last period and your cycle length to estimate your ovulation day, your 7-day fertile window, peak fertility days, next period and when to take a pregnancy test. Formula and medical sources explained.">
+<meta name="author" content="Baby Tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FFF8F3">
+<link rel="canonical" href="https://www.earlypregnancytools.com/ovulation-calculator.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Ovulation Calculator — Ovulation Day and Fertile Window | Baby Tools">
+<meta property="og:description" content="Estimate your ovulation day, fertile window and peak fertility days from your last period and cycle length. Free, private and source-cited.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.earlypregnancytools.com/ovulation-calculator.html">
+<meta property="og:site_name" content="Baby Tools">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ovulation Calculator — Ovulation Day and Fertile Window | Baby Tools">
+<meta name="twitter:description" content="Estimate your ovulation day, fertile window and peak fertility days, then download a shareable result card.">
+
+<!-- Schema.org: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Ovulation Calculator",
+  "url": "https://www.earlypregnancytools.com/ovulation-calculator.html",
+  "description": "A free ovulation calculator that estimates your ovulation day, 7-day fertile window, two peak fertility days, next period date and suggested pregnancy test date from the first day of your last menstrual period and your cycle length.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Estimate the ovulation day from the last period and cycle length",
+    "Show the 7-day fertile window",
+    "Mark the two peak fertility days before ovulation",
+    "Show the next expected period date",
+    "Suggest the earliest sensible pregnancy test date",
+    "Draw the cycle as a timeline and a calendar",
+    "Download a shareable result card as a PNG image",
+    "No sign-up and no data uploaded"
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does this ovulation calculator work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It counts backwards from the end of your cycle. Ovulation is estimated as the first day of your last period plus your cycle length minus 14 days, because the luteal phase after ovulation is usually close to 14 days long."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long is my fertile window?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator shows a 7-day fertile window: the five days before ovulation, ovulation day itself and the day after. Sperm can survive for several days inside the body, which is why the days before ovulation matter most."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are the two peak days before ovulation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pregnancy is most likely after intercourse in the two days before ovulation. This calculator marks ovulation minus 2 days and ovulation minus 1 day as the peak fertility days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this to avoid pregnancy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. This is an educational estimate, not a contraceptive method. Cycles vary from month to month and ovulation can come early or late, so do not rely on calendar predictions to prevent pregnancy. Talk to a clinician about contraception that suits you."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.earlypregnancytools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ovulation Calculator",
+      "item": "https://www.earlypregnancytools.com/ovulation-calculator.html"
+    }
+  ]
+}
+</script>
+
+<style>
+    :root {
+        --coral: #E8835A;
+        --coral-deep: #C9683F;
+        --coral-tint: #FCE7DB;
+        --bg: #FFF8F3;
+        --surface: #FFFFFF;
+        --text: #3D322C;
+        --muted: #7C6A5F;
+        --line: #EFDCD0;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(61, 50, 44, 0.06);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .wrap {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 248, 243, 0.94);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        min-height: 44px;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--coral-tint);
+        color: var(--coral-deep);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        background: #F8D9C9;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+        padding: 40px 0 24px;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .lede {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+    }
+
+    /* ---------- Calculator ---------- */
+    .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .field label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .field input {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        background: #FFFFFF;
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 1px;
+        border-color: var(--coral);
+    }
+
+    .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        background: var(--coral);
+        color: #FFFFFF;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: var(--coral-deep);
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .btn--ghost {
+        background: #FFFFFF;
+        color: var(--coral-deep);
+        border: 1.5px solid var(--coral);
+    }
+
+    .btn--ghost:hover {
+        background: var(--coral-tint);
+    }
+
+    .form-note {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .error {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border: 1px solid #EFC3AE;
+        border-left-width: 4px;
+        border-radius: 12px;
+        background: #FDEDE7;
+        color: #9A3A19;
+        font-size: 0.92rem;
+    }
+
+    .error[hidden] {
+        display: none;
+    }
+
+    /* ---------- Results ---------- */
+    .results {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+        display: none;
+    }
+
+    .result-hero {
+        text-align: center;
+        padding: 24px 16px;
+        border: 1px solid #F7DCCB;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #FFF1E8 0%, #FFF8F3 100%);
+    }
+
+    .result-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+
+    .result-date {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--coral-deep);
+    }
+
+    .result-sub {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .stat {
+        background: #FFF3EC;
+        border-radius: 12px;
+        padding: 16px 12px;
+        text-align: center;
+        min-width: 0;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--text);
+        overflow-wrap: break-word;
+    }
+
+    .results h3 {
+        margin: 24px 0 8px;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+    }
+
+    /* ---------- Timeline ---------- */
+    .timeline {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .tl-row {
+        margin-bottom: 14px;
+    }
+
+    .tl-row:last-of-type {
+        margin-bottom: 8px;
+    }
+
+    .tl-label {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 5px;
+    }
+
+    .tl-track {
+        position: relative;
+        height: 20px;
+        border-radius: 999px;
+        background: #F6E7DC;
+        overflow: hidden;
+    }
+
+    .tl-bar {
+        position: absolute;
+        top: 0;
+        height: 20px;
+        min-width: 8px;
+        border-radius: 999px;
+    }
+
+    .tl-bar--period { background: #F0B9B2; }
+    .tl-bar--fertile { background: #9FD3BE; }
+    .tl-bar--peak { background: #6FBFA3; }
+    .tl-bar--ov { background: var(--coral); }
+    .tl-bar--next { background: #E0C3B2; }
+
+    .tl-axis {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.7rem;
+        color: var(--muted);
+    }
+
+    .tl-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+        margin-top: 12px;
+        font-size: 0.76rem;
+        color: var(--muted);
+    }
+
+    .tl-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        flex: 0 0 auto;
+    }
+
+    /* ---------- Calendar ---------- */
+    .cal-wrap {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .cal-month {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 10px;
+    }
+
+    .cal {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 4px;
+    }
+
+    .cal-dow {
+        text-align: center;
+        font-size: 0.64rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding-bottom: 2px;
+    }
+
+    .cal-cell {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        border-radius: 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        background: #FFFFFF;
+        border: 1px solid #F6E7DC;
+        color: var(--text);
+    }
+
+    .cal-cell--out {
+        color: #C4B2A7;
+        background: #FFFCFA;
+        border-color: transparent;
+    }
+
+    .cal-cell--period {
+        background: #FBE4E1;
+        border-color: #F0B9B2;
+        color: #8E3B33;
+    }
+
+    .cal-cell--fertile {
+        background: #E4F3EC;
+        border-color: #B4DDCB;
+        color: #2F6B57;
+    }
+
+    .cal-cell--peak {
+        background: #BFE4D5;
+        border-color: #8FCDB6;
+        color: #1F5647;
+    }
+
+    .cal-cell--ov {
+        background: var(--coral);
+        border-color: var(--coral-deep);
+        color: #FFFFFF;
+    }
+
+    .cal-note {
+        margin-top: 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+    }
+
+    /* ---------- Download ---------- */
+    .download-block {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed #EAC7B4;
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .download-note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .download-note:empty {
+        display: none;
+    }
+
+    /* ---------- Content sections ---------- */
+    .content {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+    }
+
+    .content h3 {
+        font-size: 1.02rem;
+        margin: 20px 0 8px;
+    }
+
+    .content p {
+        margin-bottom: 12px;
+        color: #4C4039;
+    }
+
+    .content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .content ul, .content ol {
+        margin: 0 0 12px 20px;
+    }
+
+    .content li {
+        margin-bottom: 6px;
+        color: #4C4039;
+    }
+
+    .content a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .formula {
+        margin: 12px 0;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF3EC;
+        border-left: 3px solid var(--coral);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        color: #5A4638;
+    }
+
+    .note {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF1E8;
+        border: 1px solid #F7DCCB;
+        font-size: 0.9rem;
+        color: #6B5145;
+    }
+
+    .note strong {
+        color: #9A3A19;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+        border-bottom: 1px solid #F6E7DC;
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        padding: 16px 32px 16px 0;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 12px;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        color: var(--coral);
+    }
+
+    .faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .faq-item p {
+        padding-bottom: 16px;
+        margin: 0;
+        color: #4C4039;
+        font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding: 32px 0 40px;
+        font-size: 0.88rem;
+        color: var(--muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .footer-tools {
+        margin-bottom: 16px;
+        line-height: 1.9;
+        overflow-wrap: break-word;
+    }
+
+    .footer-tools strong {
+        color: var(--text);
+    }
+
+    .site-footer a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .footer-note {
+        max-width: 68ch;
+        margin-bottom: 16px;
+    }
+
+    .footer-copy {
+        font-size: 0.82rem;
+        color: #A08C80;
+    }
+
+    @media (min-width: 560px) {
+        .form-grid {
+            grid-template-columns: 1.2fr 1fr;
+            align-items: start;
+        }
+
+        .form-grid .btn,
+        .form-grid .form-note {
+            grid-column: 1 / -1;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .cal-cell {
+            min-height: 42px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (min-width: 720px) {
+        .hero {
+            padding: 48px 0 24px;
+        }
+
+        .calc-card,
+        .content {
+            padding: 32px;
+        }
+    }
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html">
+                <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <path d="M16 28.5c-1.2 0-10.5-6.2-10.5-13.4A6.1 6.1 0 0 1 16 10.6a6.1 6.1 0 0 1 10.5 4.5c0 7.2-9.3 13.4-10.5 13.4z" fill="#E8835A"/>
+                    <circle cx="16" cy="15.4" r="3.4" fill="#FFF8F3"/>
+                </svg>
+                <span>Baby Tools</span>
+            </a>
+            <a class="nav-link" href="index.html">← All tools</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="eyebrow">Cycle tool</p>
+            <h1>Ovulation Calculator</h1>
+            <p class="lede">Work out the most likely day you ovulate, the seven-day window when pregnancy is possible, and the two days that matter most — with the arithmetic and the assumptions shown in full.</p>
+        </section>
+
+        <section class="calc-card" aria-labelledby="calc-heading">
+            <h2 id="calc-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Enter your details</h2>
+            <form id="calcForm" novalidate>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="lmp">First day of your last period (LMP)</label>
+                        <input type="date" id="lmp" name="lmp" required>
+                        <span class="hint">Day 1 of your most recent menstrual period, not the last day.</span>
+                    </div>
+                    <div class="field">
+                        <label for="cycle">Cycle length (days)</label>
+                        <input type="number" id="cycle" name="cycle" value="28" min="20" max="45" step="1" inputmode="numeric" required>
+                        <span class="hint">From day 1 of one period to day 1 of the next. 20–45 days.</span>
+                    </div>
+                    <button type="submit" class="btn" id="calcBtn">Calculate my ovulation day</button>
+                    <p class="form-note">Results update automatically as you change the dates. Everything is calculated in your browser.</p>
+                </div>
+            </form>
+
+            <noscript>
+                <p class="error">This ovulation calculator needs JavaScript. Please enable it in your browser and reload the page.</p>
+            </noscript>
+
+            <div class="error" id="errorBox" role="alert" hidden></div>
+
+            <section class="results" id="results" aria-live="polite" hidden>
+                <div class="result-hero">
+                    <p class="result-label">Estimated ovulation day</p>
+                    <p class="result-date" id="resultDate">—</p>
+                    <p class="result-sub" id="resultSub">—</p>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat">
+                        <p class="stat-label">Fertile window</p>
+                        <p class="stat-value" id="resultFertile">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Peak fertility days</p>
+                        <p class="stat-value" id="resultPeak">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Next period</p>
+                        <p class="stat-value" id="resultNext">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Pregnancy test from</p>
+                        <p class="stat-value" id="resultTest">—</p>
+                    </div>
+                </div>
+
+                <h3>Your cycle at a glance</h3>
+                <div class="timeline" id="timeline"></div>
+
+                <h3>Calendar view</h3>
+                <div class="cal-wrap">
+                    <p class="cal-month" id="calMonth">—</p>
+                    <div class="cal" id="calGrid" role="group" aria-label="Calendar showing period days, fertile window and ovulation day"></div>
+                    <p class="cal-note">The first five days are shown as period days (an assumed five-day bleed). Fertile days are shaded green, the two peak days darker, and the ovulation day in coral.</p>
+                </div>
+
+                <div class="download-block">
+                    <button type="button" class="btn btn--ghost" id="downloadBtn">Download result card (PNG)</button>
+                    <p class="download-note" id="downloadNote" role="status"></p>
+                </div>
+            </section>
+        </section>
+
+        <section class="content">
+            <h2>How this ovulation calculator works</h2>
+            <p>Ovulation is estimated by counting backwards from the end of your cycle, not forwards from the start, because the second half of the cycle is the more stable part. Here is the exact arithmetic used on this page.</p>
+            <div class="formula">
+                Ovulation day = LMP + (cycle length − 14)<br>
+                Fertile window = ovulation day − 5 days → ovulation day + 1 day (7 days)<br>
+                Peak fertility days = ovulation day − 2 days and ovulation day − 1 day<br>
+                Next period = LMP + cycle length<br>
+                Suggested test date = ovulation day + 14 days
+            </div>
+            <ul>
+                <li><strong>Default assumptions.</strong> The calculator assumes a 28-day cycle and a luteal phase (the time from ovulation to the next period) of 14 days, which is the textbook default and the basis of Naegele's rule.</li>
+                <li><strong>Cycle adjustment is automatic.</strong> A 35-day cycle puts ovulation on day 21 of the cycle (35 − 14); a 24-day cycle puts it on day 10 (24 − 14). Nothing else is adjusted.</li>
+                <li><strong>Cycle length</strong> is counted from day 1 of one period to day 1 of the next, and must be a whole number from 20 to 45 days.</li>
+                <li><strong>The fertile window is seven days</strong> because sperm can survive for several days in the reproductive tract, so intercourse before ovulation can still lead to pregnancy. The egg itself survives roughly 12 to 24 hours after release.</li>
+                <li><strong>Period days are an assumption.</strong> The calendar shades the first five days after your LMP as bleeding days; your own period may be shorter or longer.</li>
+                <li><strong>All date maths uses whole UTC calendar days</strong>, so daylight-saving changes can never shift a result by a day.</li>
+            </ul>
+            <p>Dates that do not exist, such as 30 February, and dates in the future are rejected rather than silently adjusted.</p>
+        </section>
+
+        <section class="content">
+            <h2>How to read your results</h2>
+            <ul>
+                <li><strong>Ovulation day</strong> is the single best estimate of when an egg is released. It is a midpoint of a range, not a switch that flips on that morning.</li>
+                <li><strong>Fertile window</strong> is the seven-day stretch when intercourse can lead to pregnancy. The days before ovulation carry the highest chance.</li>
+                <li><strong>Peak fertility days</strong> are the two days immediately before ovulation, when conception is most likely.</li>
+                <li><strong>Next period</strong> is a simple projection: your LMP plus one cycle length. If it does not arrive roughly on time, that is the moment a pregnancy test becomes meaningful.</li>
+                <li><strong>Pregnancy test from</strong> is 14 days after the estimated ovulation day — late enough that the hormone hCG would normally be detectable. Testing earlier can produce a false negative.</li>
+            </ul>
+            <p>Body signs such as cervical mucus changes, basal body temperature and ovulation predictor kits can all add information that a calendar cannot. None of them is required to use this page, but they are worth discussing with a clinician if you are tracking carefully.</p>
+        </section>
+
+        <section class="content">
+            <h2>How accurate is a calendar-based ovulation estimate?</h2>
+            <p>Calendar prediction is a model, not a measurement. It assumes your cycle is regular and that your luteal phase is close to 14 days. Real cycles shift: stress, illness, travel and hormonal contraception can all move ovulation by several days in either direction.</p>
+            <p>That is why the fertile window here is deliberately generous. If your cycles are irregular, shorter than 21 days or longer than 35 days, or if you have a condition such as polycystic ovary syndrome, treat the dates as a rough guide only. A clinician can offer tests and advice that a calculator cannot.</p>
+        </section>
+
+        <section class="content">
+            <h2>When to talk to a clinician</h2>
+            <p>Contact a doctor or sexual health clinic if any of the following applies to you:</p>
+            <ul>
+                <li>You have been trying to conceive for 12 months without success, or 6 months if you are 35 or older.</li>
+                <li>Your cycles are consistently shorter than 21 days, longer than 35 days, or very unpredictable.</li>
+                <li>You have severe pain with periods, very heavy bleeding, or bleeding between periods.</li>
+                <li>You have a positive pregnancy test together with pain, bleeding or dizziness.</li>
+                <li>You need contraception — do not use this page to avoid pregnancy.</li>
+            </ul>
+            <div class="note">
+                <strong>Not medical advice.</strong> Baby Tools is an educational calculator. It cannot confirm ovulation, diagnose a fertility problem, or replace a consultation. Always speak to a clinician about your own cycle and your own health.
+            </div>
+        </section>
+
+        <section class="content" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details class="faq-item">
+                <summary>How does this ovulation calculator work?</summary>
+                <p>It counts backwards from the end of your cycle. Ovulation is estimated as the first day of your last period plus your cycle length minus 14 days, because the luteal phase after ovulation is usually close to 14 days long.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How long is my fertile window?</summary>
+                <p>This calculator shows a 7-day fertile window: the five days before ovulation, ovulation day itself and the day after. Sperm can survive for several days inside the body, which is why the days before ovulation matter most.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Why are the two peak days before ovulation?</summary>
+                <p>Pregnancy is most likely after intercourse in the two days before ovulation. This calculator marks ovulation minus 2 days and ovulation minus 1 day as the peak fertility days.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I use this to avoid pregnancy?</summary>
+                <p>No. This is an educational estimate, not a contraceptive method. Cycles vary from month to month and ovulation can come early or late, so do not rely on calendar predictions to prevent pregnancy. Talk to a clinician about contraception that suits you.</p>
+            </details>
+        </section>
+
+        <section class="content">
+            <h2>Sources and disclaimer</h2>
+            <p>Primary sources used for the method and the notes on this page:</p>
+            <ul>
+                <li><a href="https://www.nhs.uk/" rel="noopener">NHS — National Health Service (UK)</a>, including its guidance on the menstrual cycle and trying to conceive.</li>
+                <li><a href="https://www.acog.org/" rel="noopener">ACOG — The American College of Obstetricians and Gynecologists</a>, for its patient information on ovulation and fertility awareness.</li>
+            </ul>
+            <p>This page is informational only and is not a medical device. It does not create a clinician–patient relationship and must not be used to make medical decisions. Your dates are processed only in this browser tab; nothing is uploaded, stored or shared.</p>
+        </section>
+
+        <section class="content">
+            <h2>More baby tools</h2>
+            <p>The <a href="index.html">Baby Tools home page</a> lists every calculator. If you already know your ovulation day, the <a href="implantation-calculator.html">implantation calculator</a> estimates when a fertilised egg may implant; the <a href="conception-date-calculator.html">conception date calculator</a> works backwards from a due date; and the <a href="due-date-calculator.html">due date calculator</a> projects your due date from your last period.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p class="footer-links">
+                <a href="about.html">About</a>
+                <a href="editorial-policy.html">Editorial policy</a>
+                <a href="privacy.html">Privacy</a>
+            </p>
+            <p class="footer-tools"><strong>Tools:</strong> <a href="due-date-calculator.html">Due Date Calculator</a> · <a href="ovulation-calculator.html">Ovulation Calculator</a> · <a href="conception-date-calculator.html">Conception Date Calculator</a> · <a href="implantation-calculator.html">Implantation Calculator</a> · <a href="index.html">All tools home</a></p>
+            <p class="footer-tools"><strong>Guides &amp; data:</strong> <a href="pregnancy-weight-gain-chart.html">Pregnancy Weight Gain Chart</a> · <a href="baby-feeding-chart.html">Baby Feeding Chart</a> · <a href="baby-sleep-schedule.html">Baby Sleep Schedule</a></p>
+            <p class="footer-note">Baby Tools is an independent educational project. This ovulation calculator is not a contraceptive method and not a medical device. If you are worried about your cycle or your fertility, contact a healthcare professional.</p>
+            <p class="footer-copy">&copy; 2026 Baby Tools</p>
+        </div>
+    </footer>
+
+<script>
+    'use strict';
+
+    var MS_PER_DAY = 86400000;
+    var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var MONTH_ABBR = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var DOW_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var DOW_SHORT = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    var PERIOD_DAYS = 5;
+    var CARD_FONT = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : String(n);
+    }
+
+    // Parse a strict YYYY-MM-DD string and return a UTC day number, or null.
+    // The round-trip check rejects impossible dates such as 2026-02-29 or 2026-02-30.
+    function parseISODate(iso) {
+        if (typeof iso !== 'string') { return null; }
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+        if (!m) { return null; }
+        var y = Number(m[1]);
+        var mo = Number(m[2]);
+        var d = Number(m[3]);
+        if (mo < 1 || mo > 12 || d < 1 || d > 31) { return null; }
+        var serial = Date.UTC(y, mo - 1, d) / MS_PER_DAY;
+        var back = new Date(serial * MS_PER_DAY);
+        if (back.getUTCFullYear() !== y || back.getUTCMonth() !== mo - 1 || back.getUTCDate() !== d) {
+            return null;
+        }
+        return { serial: serial };
+    }
+
+    function serialToISO(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+    }
+
+    function formatLongDate(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return MONTH_NAMES[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    }
+
+    function formatShortDate(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return MONTH_ABBR[d.getUTCMonth()] + ' ' + d.getUTCDate();
+    }
+
+    function dowOf(serial) {
+        return new Date(serial * MS_PER_DAY).getUTCDay();
+    }
+
+    // Pure calculation. Every date in and out is a UTC calendar day, so DST never shifts a result.
+    function calculateOvulation(lmpISO, cycleLength, todayISO) {
+        var lmp = parseISODate(lmpISO);
+        if (!lmp) {
+            return { ok: false, error: 'That date does not exist. Please pick a real calendar date for the first day of your last period.' };
+        }
+        var today = parseISODate(todayISO);
+        if (!today) {
+            return { ok: false, error: 'Today\u2019s date could not be read. Please reload the page and try again.' };
+        }
+        var cycle = NaN;
+        if (typeof cycleLength === 'number') {
+            cycle = cycleLength;
+        } else if (typeof cycleLength === 'string' && cycleLength.trim() !== '') {
+            cycle = Number(cycleLength.trim());
+        }
+        if (!isFinite(cycle) || cycle !== Math.floor(cycle)) {
+            return { ok: false, error: 'Cycle length must be a whole number between 20 and 45 days.' };
+        }
+        if (cycle < 20 || cycle > 45) {
+            return { ok: false, error: 'Cycle length must be a whole number between 20 and 45 days.' };
+        }
+        if (today.serial < lmp.serial) {
+            return { ok: false, error: 'Your last period cannot start in the future. Please check the date and try again.' };
+        }
+
+        var ov = lmp.serial + cycle - 14;
+        var fertileStart = ov - 5;
+        var fertileEnd = ov + 1;
+        var peakStart = ov - 2;
+        var peakEnd = ov - 1;
+        var nextPeriod = lmp.serial + cycle;
+        var testDate = ov + 14;
+        var periodEnd = lmp.serial + PERIOD_DAYS - 1;
+
+        var cells = [];
+        var gridStart = lmp.serial - dowOf(lmp.serial);
+        var lastDay = Math.max(nextPeriod - 1, fertileEnd, periodEnd);
+        var gridEnd = lastDay + (6 - dowOf(lastDay));
+        for (var s = gridStart; s <= gridEnd; s++) {
+            var cls;
+            if (s === ov) {
+                cls = 'cal-cell--ov';
+            } else if (s === peakStart || s === peakEnd) {
+                cls = 'cal-cell--peak';
+            } else if (s >= fertileStart && s <= fertileEnd) {
+                cls = 'cal-cell--fertile';
+            } else if (s >= lmp.serial && s <= periodEnd) {
+                cls = 'cal-cell--period';
+            } else if (s < lmp.serial || s > nextPeriod - 1) {
+                cls = 'cal-cell--out';
+            } else {
+                cls = '';
+            }
+            cells.push({
+                day: new Date(s * MS_PER_DAY).getUTCDate(),
+                cls: cls,
+                iso: serialToISO(s)
+            });
+        }
+
+        var months = [];
+        for (var i = 0; i < cells.length; i++) {
+            var mIdx = MONTH_NAMES[new Date(parseISODate(cells[i].iso).serial * MS_PER_DAY).getUTCMonth()];
+            if (months.indexOf(mIdx) === -1) { months.push(mIdx); }
+        }
+
+        var rows = [
+            { label: 'Period (assumed ' + PERIOD_DAYS + ' days)', from: 1, to: Math.min(PERIOD_DAYS, cycle), cls: 'tl-bar--period' },
+            { label: 'Fertile window (' + (fertileEnd - fertileStart + 1) + ' days)', from: cycle - 19, to: cycle - 13, cls: 'tl-bar--fertile' },
+            { label: 'Peak days', from: cycle - 16, to: cycle - 15, cls: 'tl-bar--peak' },
+            { label: 'Ovulation', from: cycle - 14, to: cycle - 14, cls: 'tl-bar--ov' },
+            { label: 'Next period', from: cycle, to: cycle, cls: 'tl-bar--next' }
+        ];
+
+        return {
+            ok: true,
+            lmpISO: serialToISO(lmp.serial),
+            lmpLabel: formatLongDate(lmp.serial),
+            cycleLength: cycle,
+            ovulationISO: serialToISO(ov),
+            ovulationLabel: formatLongDate(ov),
+            ovulationWeekday: DOW_NAMES[dowOf(ov)],
+            fertileStartISO: serialToISO(fertileStart),
+            fertileEndISO: serialToISO(fertileEnd),
+            fertileShort: formatShortDate(fertileStart) + ' – ' + formatShortDate(fertileEnd),
+            fertileLong: formatLongDate(fertileStart) + ' – ' + formatLongDate(fertileEnd),
+            peakShort: formatShortDate(peakStart) + ' – ' + formatShortDate(peakEnd),
+            peakLong: formatLongDate(peakStart) + ' and ' + formatLongDate(peakEnd),
+            nextPeriodISO: serialToISO(nextPeriod),
+            nextPeriodLabel: formatLongDate(nextPeriod),
+            testISO: serialToISO(testDate),
+            testLabel: formatLongDate(testDate),
+            calendar: cells,
+            calendarMonths: months.join(' · '),
+            timelineRows: rows,
+            cycleDays: cycle
+        };
+    }
+
+    // ---------- UI wiring ----------
+    var form = document.getElementById('calcForm');
+    var lmpInput = document.getElementById('lmp');
+    var cycleInput = document.getElementById('cycle');
+    var errorBox = document.getElementById('errorBox');
+    var resultsBox = document.getElementById('results');
+    var calendarGrid = document.getElementById('calGrid');
+    var timelineBox = document.getElementById('timeline');
+    var downloadNote = document.getElementById('downloadNote');
+    var lastResult = null;
+
+    function todayISO() {
+        var n = new Date();
+        return n.getFullYear() + '-' + pad2(n.getMonth() + 1) + '-' + pad2(n.getDate());
+    }
+
+    function showError(message) {
+        errorBox.textContent = message;
+        errorBox.hidden = false;
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.hidden = true;
+    }
+
+    function clearResults() {
+        lastResult = null;
+        resultsBox.hidden = true;
+        calendarGrid.innerHTML = '';
+        timelineBox.innerHTML = '';
+        downloadNote.textContent = '';
+    }
+
+    function renderTimeline(result) {
+        var frag = document.createDocumentFragment();
+        var cycle = result.cycleDays;
+        for (var i = 0; i < result.timelineRows.length; i++) {
+            var row = result.timelineRows[i];
+            var from = Math.max(1, Math.min(row.from, cycle));
+            var to = Math.max(from, Math.min(row.to, cycle));
+            var left = ((from - 1) / cycle) * 100;
+            var width = ((to - from + 1) / cycle) * 100;
+
+            var rowEl = document.createElement('div');
+            rowEl.className = 'tl-row';
+
+            var label = document.createElement('span');
+            label.className = 'tl-label';
+            label.textContent = row.label;
+
+            var track = document.createElement('div');
+            track.className = 'tl-track';
+
+            var bar = document.createElement('span');
+            bar.className = 'tl-bar ' + row.cls;
+            bar.style.left = left.toFixed(4) + '%';
+            bar.style.width = width.toFixed(4) + '%';
+
+            track.appendChild(bar);
+            rowEl.appendChild(label);
+            rowEl.appendChild(track);
+            frag.appendChild(rowEl);
+        }
+
+        var axis = document.createElement('div');
+        axis.className = 'tl-axis';
+        var a1 = document.createElement('span');
+        a1.textContent = 'Day 1';
+        var a2 = document.createElement('span');
+        a2.textContent = 'Day ' + Math.ceil(cycle / 2);
+        var a3 = document.createElement('span');
+        a3.textContent = 'Day ' + cycle;
+        axis.appendChild(a1);
+        axis.appendChild(a2);
+        axis.appendChild(a3);
+        frag.appendChild(axis);
+
+        var legend = document.createElement('div');
+        legend.className = 'tl-legend';
+        var legendItems = [
+            { cls: 'tl-bar--period', text: 'Period' },
+            { cls: 'tl-bar--fertile', text: 'Fertile window' },
+            { cls: 'tl-bar--peak', text: 'Peak days' },
+            { cls: 'tl-bar--ov', text: 'Ovulation day' }
+        ];
+        for (var j = 0; j < legendItems.length; j++) {
+            var item = document.createElement('span');
+            var dot = document.createElement('span');
+            dot.className = 'dot ' + legendItems[j].cls;
+            item.appendChild(dot);
+            item.appendChild(document.createTextNode(legendItems[j].text));
+            legend.appendChild(item);
+        }
+        frag.appendChild(legend);
+
+        timelineBox.innerHTML = '';
+        timelineBox.appendChild(frag);
+    }
+
+    function renderCalendar(result) {
+        calendarGrid.innerHTML = '';
+        var frag = document.createDocumentFragment();
+        for (var i = 0; i < 7; i++) {
+            var head = document.createElement('div');
+            head.className = 'cal-dow';
+            head.textContent = DOW_SHORT[i];
+            frag.appendChild(head);
+        }
+        for (var j = 0; j < result.calendar.length; j++) {
+            var cell = document.createElement('div');
+            cell.className = result.calendar[j].cls ? 'cal-cell ' + result.calendar[j].cls : 'cal-cell';
+            cell.textContent = String(result.calendar[j].day);
+            cell.setAttribute('title', result.calendar[j].iso);
+            frag.appendChild(cell);
+        }
+        calendarGrid.appendChild(frag);
+        document.getElementById('calMonth').textContent = result.calendarMonths;
+    }
+
+    function render(result) {
+        document.getElementById('resultDate').textContent = result.ovulationLabel;
+        document.getElementById('resultSub').textContent = result.ovulationWeekday + ' · based on an LMP of ' + result.lmpLabel + ' and a ' + result.cycleLength + '-day cycle.';
+        document.getElementById('resultFertile').textContent = result.fertileShort;
+        document.getElementById('resultPeak').textContent = result.peakShort;
+        document.getElementById('resultNext').textContent = result.nextPeriodLabel;
+        document.getElementById('resultTest').textContent = result.testLabel;
+
+        renderTimeline(result);
+        renderCalendar(result);
+
+        downloadNote.textContent = '';
+        resultsBox.hidden = false;
+        lastResult = result;
+    }
+
+    // showErrors = true means the user asked for a result (button or field committed):
+    // every problem is reported. Automatic recalculation stays quiet while the LMP is empty.
+    function update(showErrors) {
+        var lmpValue = lmpInput.value;
+        var cycleValue = cycleInput.value;
+        if (!lmpValue) {
+            clearResults();
+            if (showErrors) {
+                showError('Please choose the first day of your last menstrual period.');
+            } else {
+                hideError();
+            }
+            return;
+        }
+        var result = calculateOvulation(lmpValue, cycleValue, todayISO());
+        if (!result.ok) {
+            clearResults();
+            showError(result.error);
+            return;
+        }
+        hideError();
+        render(result);
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        update(true);
+    });
+    lmpInput.addEventListener('input', function () { update(false); });
+    lmpInput.addEventListener('change', function () { update(true); });
+    cycleInput.addEventListener('input', function () { update(true); });
+    cycleInput.addEventListener('change', function () { update(true); });
+
+    // ---------- Canvas result card ----------
+    function roundRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+    }
+
+    function topRoundedRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.arcTo(x + w, y, x + w, y + r, r);
+        ctx.lineTo(x + w, y + h);
+        ctx.lineTo(x, y + h);
+        ctx.lineTo(x, y + r);
+        ctx.arcTo(x, y, x + r, y, r);
+        ctx.closePath();
+    }
+
+    function fitFont(ctx, text, maxWidth, startSize, weight, minSize) {
+        var size = startSize;
+        while (size > minSize) {
+            ctx.font = weight + ' ' + size + 'px ' + CARD_FONT;
+            if (ctx.measureText(text).width <= maxWidth) { break; }
+            size -= 2;
+        }
+        ctx.font = weight + ' ' + size + 'px ' + CARD_FONT;
+        return size;
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+        var words = text.split(' ');
+        var line = '';
+        var lines = [];
+        for (var i = 0; i < words.length; i++) {
+            var test = line ? line + ' ' + words[i] : words[i];
+            if (ctx.measureText(test).width > maxWidth && line) {
+                lines.push(line);
+                line = words[i];
+            } else {
+                line = test;
+            }
+        }
+        if (line) { lines.push(line); }
+        for (var j = 0; j < lines.length && j < maxLines; j++) {
+            ctx.fillText(lines[j], x, y + j * lineHeight);
+        }
+    }
+
+    function drawStatBox(ctx, x, y, w, h, label, value) {
+        roundRect(ctx, x, y, w, h, 28);
+        ctx.fillStyle = '#FFF3EC';
+        ctx.fill();
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#9A8578';
+        ctx.font = '700 19px ' + CARD_FONT;
+        ctx.fillText(label, x + 32, y + 58);
+        ctx.fillStyle = '#3D322C';
+        fitFont(ctx, value, w - 64, 38, '700', 20);
+        ctx.fillText(value, x + 32, y + 134);
+    }
+
+    function drawResultCard(result) {
+        var W = 1080;
+        var H = 1350;
+        var canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        var ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = '#FFF8F3';
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.fillStyle = '#FBE3D7';
+        ctx.beginPath();
+        ctx.arc(1030, 1310, 150, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(40, 40, 110, 0, Math.PI * 2);
+        ctx.fill();
+
+        roundRect(ctx, 60, 60, 960, 1230, 40);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fill();
+        ctx.strokeStyle = '#F2DED1';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        topRoundedRect(ctx, 60, 60, 960, 300, 40);
+        ctx.fillStyle = '#E8835A';
+        ctx.fill();
+
+        ctx.save();
+        ctx.globalAlpha = 0.14;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.beginPath();
+        ctx.arc(950, 120, 110, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(860, 330, 70, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '700 46px ' + CARD_FONT;
+        ctx.fillText('Baby Tools', 112, 186);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.font = '400 24px ' + CARD_FONT;
+        ctx.fillText('Pregnancy & baby calculators', 112, 234);
+
+        ctx.fillStyle = '#9A8578';
+        ctx.font = '700 25px ' + CARD_FONT;
+        ctx.fillText('ESTIMATED OVULATION DAY', 112, 440);
+
+        ctx.fillStyle = '#3D322C';
+        fitFont(ctx, result.ovulationLabel, 856, 104, '700', 56);
+        ctx.fillText(result.ovulationLabel, 112, 552);
+
+        ctx.fillStyle = '#7C6A5F';
+        ctx.font = '400 26px ' + CARD_FONT;
+        ctx.fillText(result.ovulationWeekday + '  ·  LMP ' + result.lmpLabel + '  ·  ' + result.cycleLength + '-day cycle', 112, 606);
+
+        drawStatBox(ctx, 112, 660, 408, 190, 'FERTILE WINDOW', result.fertileShort);
+        drawStatBox(ctx, 560, 660, 408, 190, 'PEAK FERTILITY DAYS', result.peakShort);
+        drawStatBox(ctx, 112, 872, 408, 190, 'NEXT PERIOD', result.nextPeriodLabel);
+        drawStatBox(ctx, 560, 872, 408, 190, 'PREGNANCY TEST FROM', result.testLabel);
+
+        ctx.fillStyle = '#3D322C';
+        ctx.font = '600 28px ' + CARD_FONT;
+        wrapText(ctx, 'Fertile window: ' + result.fertileLong, 112, 1126, 856, 36, 1);
+
+        ctx.fillStyle = '#9A8578';
+        ctx.font = '400 24px ' + CARD_FONT;
+        ctx.fillText('Generated ' + formatLongDate(parseISODate(todayISO()).serial), 112, 1186);
+        ctx.textAlign = 'right';
+        ctx.fillText('earlypregnancytools.com', 968, 1186);
+        ctx.textAlign = 'left';
+
+        ctx.fillStyle = '#9A8578';
+        ctx.font = '400 20px ' + CARD_FONT;
+        wrapText(ctx, 'Assumes a 14-day luteal phase. A calendar estimate is not a contraceptive method and not medical advice. Talk to a clinician about your own cycle.', 112, 1236, 856, 30, 2);
+
+        return canvas;
+    }
+
+    function triggerDownload(href, filename) {
+        var link = document.createElement('a');
+        link.href = href;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+        if (!lastResult) { return; }
+        var canvas = drawResultCard(lastResult);
+        var filename = 'baby-tools-ovulation.png';
+        if (typeof canvas.toBlob === 'function') {
+            canvas.toBlob(function (blob) {
+                if (!blob) {
+                    triggerDownload(canvas.toDataURL('image/png'), filename);
+                } else {
+                    var url = URL.createObjectURL(blob);
+                    triggerDownload(url, filename);
+                    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+                }
+                downloadNote.textContent = 'Saved as ' + filename;
+            }, 'image/png');
+        } else {
+            triggerDownload(canvas.toDataURL('image/png'), filename);
+            downloadNote.textContent = 'Saved as ' + filename;
+        }
+    });
+
+    // Recalculate on load if the browser restores a previous date value.
+    if (lmpInput.value) {
+        update(false);
+    }
+</script>
+</body>
+</html>
