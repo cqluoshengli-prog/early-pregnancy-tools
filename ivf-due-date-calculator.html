@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IVF Due Date Calculator (Day 3 and Day 5 Transfers)</title>
+<meta name="description" content="Estimate an IVF due date from your transfer date and embryo stage. Day 5 blastocyst transfers add 261 days, day 3 transfers add 263, with current gestation and trimester dates.">
+<meta name="author" content="Early Pregnancy Tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FFF8F3">
+<link rel="canonical" href="https://www.earlypregnancytools.com/ivf-due-date-calculator.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="IVF Due Date Calculator (Day 3 and Day 5 Transfers)">
+<meta property="og:description" content="Work out an IVF due date from the transfer date and embryo stage, see current gestational age and the trimester dates, with the formula shown.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.earlypregnancytools.com/ivf-due-date-calculator.html">
+<meta property="og:site_name" content="Early Pregnancy Tools">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IVF Due Date Calculator (Day 3 and Day 5 Transfers)">
+<meta name="twitter:description" content="Estimate an IVF due date from the transfer date and embryo stage, with current gestation and trimester dates.">
+
+<!-- Schema.org: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "IVF Due Date Calculator",
+  "url": "https://www.earlypregnancytools.com/ivf-due-date-calculator.html",
+  "description": "A free calculator that estimates an IVF due date from the embryo transfer date and embryo stage, and shows current gestational age and trimester dates.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Estimate a due date after a day 5 blastocyst transfer",
+    "Estimate a due date after a day 3 cleavage-stage transfer",
+    "Show current gestational age in weeks and days",
+    "Show the end of the first and second trimesters and the start of term",
+    "Explain why the transfer day already counts as about two weeks of pregnancy",
+    "No sign-up and no data uploaded"
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does a day 5 transfer add 261 days?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A pregnancy is dated from the last period, which is about 280 days before the due date. A day 5 blastocyst is already 5 days past fertilisation on transfer day, and obstetric dating counts fertilisation as roughly 14 days after the last period. That makes the transfer day about 19 days into the pregnancy, so the due date is 280 minus 19, or 261 days, after transfer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a frozen embryo transfer change the due date?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If you had a frozen embryo transfer and no adjustment was made to the timing of the transfer, the same embryo-age arithmetic applies. If your clinic used an endometrial receptivity test or another protocol that shifted the transfer, the due date should be based on the timing your clinic used, not on this calculator."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I had a day 6 blastocyst?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This calculator supports day 3 and day 5 transfers only. A day 6 blastocyst is one day further on in development, so the arithmetic is different. Use the due date your reproductive centre gave you rather than adjusting this result yourself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use this after a fresh embryo transfer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The embryo-age part of the calculation is the same for a fresh transfer of a day 3 or day 5 embryo. The date your clinic gives you takes priority, because it also reflects the exact embryo stage and the clinic's own dating convention."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.earlypregnancytools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "IVF Due Date Calculator",
+      "item": "https://www.earlypregnancytools.com/ivf-due-date-calculator.html"
+    }
+  ]
+}
+</script>
+
+<style>
+    :root {
+        --coral: #E8835A;
+        --coral-deep: #A94E2A;
+        --coral-tint: #FCE7DB;
+        --bg: #FFF8F3;
+        --surface: #FFFFFF;
+        --text: #3D322C;
+        --muted: #7C6A5F;
+        --line: #EFDCD0;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(61, 50, 44, 0.06);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .wrap {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 248, 243, 0.94);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        min-height: 44px;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--coral-tint);
+        color: var(--coral-deep);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        background: #F8D9C9;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+        padding: 40px 0 24px;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .lede {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+    }
+
+    /* ---------- Calculator ---------- */
+    .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .field label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .field input {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        background: #FFFFFF;
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 1px;
+        border-color: var(--coral);
+    }
+
+    .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        background: var(--coral-deep);
+        color: #FFFFFF;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: #8E3F1F;
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .btn--ghost {
+        background: #FFFFFF;
+        color: var(--coral-deep);
+        border: 1.5px solid var(--coral);
+    }
+
+    .btn--ghost:hover {
+        background: var(--coral-tint);
+    }
+
+    .form-note {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .error {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border: 1px solid #EFC3AE;
+        border-left-width: 4px;
+        border-radius: 12px;
+        background: #FDEDE7;
+        color: #9A3A19;
+        font-size: 0.92rem;
+    }
+
+    .error[hidden] {
+        display: none;
+    }
+
+    /* ---------- Results ---------- */
+    .results {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+        display: none;
+    }
+
+    .result-hero {
+        text-align: center;
+        padding: 24px 16px;
+        border: 1px solid #F7DCCB;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #FFF1E8 0%, #FFF8F3 100%);
+    }
+
+    .result-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+
+    .result-date {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--coral-deep);
+    }
+
+    .result-sub {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .stat {
+        background: #FFF3EC;
+        border-radius: 12px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .progress-block {
+        margin-top: 24px;
+    }
+
+    .progress-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .progress-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #F6E7DC;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 999px;
+        background: var(--coral-deep);
+        transition: width 0.25s ease;
+    }
+
+    .progress-legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 0.7rem;
+        color: var(--muted);
+    }
+
+    .results h3 {
+        margin: 24px 0 8px;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+    }
+
+    .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px 16px;
+        text-align: left;
+        border-bottom: 1px solid #F6E7DC;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #FFF3EC;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    td:last-child {
+        font-weight: 600;
+    }
+
+    .download-block {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed #EAC7B4;
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .download-note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .download-note:empty {
+        display: none;
+    }
+
+    /* ---------- Content sections ---------- */
+    .content {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+    }
+
+    .content h3 {
+        font-size: 1.02rem;
+        margin: 20px 0 8px;
+    }
+
+    .content p {
+        margin-bottom: 12px;
+        color: #4C4039;
+    }
+
+    .content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .content ul, .content ol {
+        margin: 0 0 12px 20px;
+    }
+
+    .content li {
+        margin-bottom: 6px;
+        color: #4C4039;
+    }
+
+    .content a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .formula {
+        margin: 12px 0;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF3EC;
+        border-left: 3px solid var(--coral);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+        color: #5A4638;
+    }
+
+    .note {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF1E8;
+        border: 1px solid #F7DCCB;
+        font-size: 0.9rem;
+        color: #6B5145;
+    }
+
+    .note strong {
+        color: #9A3A19;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+        border-bottom: 1px solid #F6E7DC;
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        padding: 16px 32px 16px 0;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 12px;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        color: var(--coral);
+    }
+
+    .faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .faq-item p {
+        padding-bottom: 16px;
+        margin: 0;
+        color: #4C4039;
+        font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding: 32px 0 40px;
+        font-size: 0.88rem;
+        color: var(--muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .footer-tools {
+        margin-bottom: 16px;
+        line-height: 1.8;
+    }
+
+    .footer-tools strong {
+        color: var(--text);
+    }
+
+    .site-footer a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .footer-note {
+        max-width: 68ch;
+        margin-bottom: 16px;
+    }
+
+    .footer-copy {
+        font-size: 0.82rem;
+        color: #A08C80;
+    }
+
+    @media (min-width: 560px) {
+        .form-grid {
+            grid-template-columns: 1.2fr 1fr;
+            align-items: start;
+        }
+
+        .form-grid .btn,
+        .form-grid .form-note {
+            grid-column: 1 / -1;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 720px) {
+        .hero {
+            padding: 48px 0 24px;
+        }
+
+        .calc-card,
+        .content {
+            padding: 32px;
+        }
+    }
+
+    .page-meta {
+        margin-top: 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .related {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .related a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .related a:hover {
+        border-color: var(--coral);
+    }
+
+    .footer-copy {
+        color: var(--muted);
+    }
+
+    .mode-fieldset {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 16px 8px;
+        margin: 0;
+        min-width: 0;
+    }
+
+    .mode-fieldset legend {
+        padding: 0 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .choice {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        min-height: 44px;
+        padding: 8px 0;
+        cursor: pointer;
+    }
+
+    .choice input {
+        width: 20px;
+        height: 20px;
+        margin-top: 3px;
+        flex: 0 0 auto;
+        accent-color: var(--coral-deep);
+    }
+
+    .choice-text {
+        display: block;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .choice-note {
+        display: block;
+        font-weight: 400;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .form-grid .mode-fieldset,
+    .form-grid .field--full {
+        grid-column: 1 / -1;
+    }
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html">
+                <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <path d="M16 28.5c-1.2 0-10.5-6.2-10.5-13.4A6.1 6.1 0 0 1 16 10.6a6.1 6.1 0 0 1 10.5 4.5c0 7.2-9.3 13.4-10.5 13.4z" fill="#E8835A"/>
+                    <circle cx="16" cy="15.4" r="3.4" fill="#FFF8F3"/>
+                </svg>
+                <span>Early Pregnancy Tools</span>
+            </a>
+            <a class="nav-link" href="index.html">← All tools</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="eyebrow">Fertility tool</p>
+            <h1>IVF Due Date Calculator</h1>
+            <p class="lede">Enter your embryo transfer date and the stage of the embryo. The calculator estimates your due date, your current gestational age and the trimester dates, using the day 3 and day 5 transfer convention.</p>
+            <p class="page-meta">Last updated: <time datetime="2026-11-11">November 11, 2026</time></p>
+        </section>
+
+        <section class="calc-card" aria-labelledby="calc-heading">
+            <h2 id="calc-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Enter your transfer details</h2>
+            <form id="calcForm" novalidate>
+                <div class="form-grid">
+                    <div class="field field--full">
+                        <label for="transferDate">Embryo transfer date</label>
+                        <input type="date" id="transferDate" name="transferDate" required>
+                        <span class="hint">The date the embryo was transferred, as written on your clinic letter.</span>
+                    </div>
+
+                    <fieldset class="mode-fieldset">
+                        <legend>Embryo stage at transfer</legend>
+                        <label class="choice">
+                            <input type="radio" name="stage" id="stageDay5" value="day5" checked>
+                            <span>
+                                <span class="choice-text">Day 5 blastocyst</span>
+                                <span class="choice-note">A blastocyst transferred five days after fertilisation.</span>
+                            </span>
+                        </label>
+                        <label class="choice">
+                            <input type="radio" name="stage" id="stageDay3" value="day3">
+                            <span>
+                                <span class="choice-text">Day 3 cleavage-stage embryo</span>
+                                <span class="choice-note">An embryo transferred three days after fertilisation.</span>
+                            </span>
+                        </label>
+                    </fieldset>
+
+                    <button type="submit" class="btn" id="calcBtn">Calculate my due date</button>
+                    <p class="form-note">Results update automatically as you change the details. Everything is calculated in your browser.</p>
+                </div>
+            </form>
+
+            <noscript>
+                <p class="error">This IVF due date calculator needs JavaScript. Please enable it in your browser and reload the page.</p>
+            </noscript>
+
+            <div class="error" id="errorBox" role="alert" hidden></div>
+
+            <section class="results" id="results" aria-live="polite" hidden>
+                <div class="result-hero">
+                    <p class="result-label">Estimated due date</p>
+                    <p class="result-date" id="resultDate">—</p>
+                    <p class="result-sub" id="resultSub">—</p>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat">
+                        <p class="stat-label">Current pregnancy</p>
+                        <p class="stat-value" id="resultGa">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Trimester</p>
+                        <p class="stat-value" id="resultTri">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Days to due date</p>
+                        <p class="stat-value" id="resultDays">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Transfer day counts as</p>
+                        <p class="stat-value" id="resultTransfer">—</p>
+                    </div>
+                </div>
+
+                <h3>Pregnancy dates</h3>
+                <div class="table-wrap">
+                    <table>
+                        <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Calendar dates for the end of the first trimester, the end of the second trimester, the start of term and the due date</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Milestone</th>
+                                <th scope="col">Calendar date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="milestoneBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="note">
+                    <strong>Information only.</strong> This estimate uses the standard embryo-age convention. It cannot replace your clinic's dating, and it does not assess your pregnancy. Use the due date your reproductive centre gave you if the two differ.
+                </div>
+            </section>
+        </section>
+
+        <section class="content">
+            <h2>How this IVF due date calculator works</h2>
+            <p>Obstetric dating counts pregnancy from the last period, about 280 days before the due date. An embryo at transfer is already a known number of days past fertilisation, so that age is subtracted from 280.</p>
+            <div class="formula">
+                Day 5 blastocyst: due date = transfer date + 261 days<br>
+                Day 3 cleavage-stage embryo: due date = transfer date + 263 days<br>
+                Gestational age on transfer day = 2 weeks 5 days (day 5) or 2 weeks 3 days (day 3)<br>
+                Current gestational age = today − transfer date + 19 days (day 5) or + 17 days (day 3)
+            </div>
+            <ul>
+                <li><strong>Day 5: 280 − 19 = 261.</strong> A blastocyst is five days past fertilisation, and fertilisation is counted as about 14 days after the last period, so the transfer day is 2 weeks 5 days (19 days) into the pregnancy.</li>
+                <li><strong>Day 3: 280 − 17 = 263.</strong> A cleavage-stage embryo is three days past fertilisation, which makes the transfer day 2 weeks 3 days (17 days).</li>
+                <li><strong>The embryo's age is not your pregnancy's age.</strong> The transfer day already counts as roughly two weeks pregnant, which is why the due date is not simply 40 weeks after transfer.</li>
+                <li><strong>All date maths uses whole UTC calendar days</strong>, so a clock change can never shift a result by a day.</li>
+                <li><strong>Only day 3 and day 5 are supported.</strong> Other stages use different arithmetic, so the calculator does not guess at them.</li>
+            </ul>
+        </section>
+
+        <section class="content">
+            <h2>Frozen transfers, fresh transfers and ERA</h2>
+            <p>If you had a frozen embryo transfer and no adjustment was made to the timing, the same embryo-age arithmetic applies: the embryo's stage matters, not whether it was frozen. This is the convention most clinics use when no endometrial receptivity array (ERA) or other timing adjustment has changed the transfer day.</p>
+            <p>If your clinic used an ERA or another protocol that moved the transfer relative to your cycle, the due date should be based on the timing your clinic used. In that situation, this calculator can be a day or more out, and the clinic's date should win.</p>
+            <p>A fresh transfer of a day 3 or day 5 embryo uses the same embryo-age rule. The date your clinic gives you takes priority because it reflects the exact stage recorded in the laboratory.</p>
+        </section>
+
+        <section class="content">
+            <h2>When the result may not apply</h2>
+            <p>This calculator is a single formula with two inputs. Several situations fall outside it, and in each of them your reproductive centre's date is the one to use:</p>
+            <ul>
+                <li><strong>A day 6 blastocyst or another embryo stage.</strong> One extra day of development changes the subtraction, so the arithmetic here does not apply.</li>
+                <li><strong>More than one embryo transferred.</strong> A multiple pregnancy may be dated and monitored differently, and the clinic will give you the date it is using.</li>
+                <li><strong>A clinic-specific dating convention.</strong> Some centres adjust the date after an early scan. A scan measurement can revise the date you were given.</li>
+                <li><strong>An uncertain transfer date.</strong> If you are unsure which date was the transfer, check your clinic letter before relying on any calculation.</li>
+            </ul>
+            <p>If your clinic's due date differs from this one, do not change it yourself. Ask your clinic which date they are using and why.</p>
+        </section>
+
+        <section class="content" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details class="faq-item">
+                <summary>Why does a day 5 transfer add 261 days?</summary>
+                <p>A pregnancy is dated from the last period, which is about 280 days before the due date. A day 5 blastocyst is already 5 days past fertilisation on transfer day, and obstetric dating counts fertilisation as roughly 14 days after the last period. That makes the transfer day about 19 days into the pregnancy, so the due date is 280 minus 19, or 261 days, after transfer.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Does a frozen embryo transfer change the due date?</summary>
+                <p>If you had a frozen embryo transfer and no adjustment was made to the timing of the transfer, the same embryo-age arithmetic applies. If your clinic used an endometrial receptivity test or another protocol that shifted the transfer, the due date should be based on the timing your clinic used, not on this calculator.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What if I had a day 6 blastocyst?</summary>
+                <p>This calculator supports day 3 and day 5 transfers only. A day 6 blastocyst is one day further on in development, so the arithmetic is different. Use the due date your reproductive centre gave you rather than adjusting this result yourself.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I use this after a fresh embryo transfer?</summary>
+                <p>The embryo-age part of the calculation is the same for a fresh transfer of a day 3 or day 5 embryo. The date your clinic gives you takes priority, because it also reflects the exact embryo stage and the clinic's own dating convention.</p>
+            </details>
+        </section>
+
+        <section class="content">
+            <h2>Sources and disclaimer</h2>
+            <p>Sources used for the method and the notes on this page:</p>
+            <ul>
+                <li><a href="https://www.acog.org/womens-health/faqs/evaluating-infertility" rel="noopener">ACOG — Evaluating infertility</a> (American College of Obstetricians and Gynecologists), for the context of assisted reproduction and early pregnancy dating.</li>
+                <li><a href="https://www.acog.org/" rel="noopener">ACOG — The American College of Obstetricians and Gynecologists</a>, for guidance on estimating gestational age.</li>
+                <li><a href="https://www.asrm.org/topics/topics-index/in-vitro-fertilization-ivf/" rel="noopener">ASRM — In vitro fertilization (IVF)</a> (American Society for Reproductive Medicine).</li>
+                <li><a href="https://www.asrm.org/" rel="noopener">ASRM — American Society for Reproductive Medicine</a>, for patient information on embryo transfer and IVF.</li>
+            </ul>
+            <p>This page is informational only and is not a medical device. It does not create a clinician–patient relationship and must not be used to make medical decisions. Your reproductive centre's dating takes priority over any result on this page.</p>
+            <p>Your dates are processed only in this browser tab. Nothing is uploaded, stored or shared.</p>
+        </section>
+
+        <section class="content">
+            <h2>Related tools</h2>
+            <p>The <a href="conception-date-calculator.html">conception date calculator</a> works in the other direction, from a due date or last period. If you have two hCG results, the <a href="hcg-doubling-calculator.html">hCG doubling calculator</a> shows the interval and doubling time.</p>
+            <div class="related">
+                <a href="index.html">All tools</a>
+                <a href="conception-date-calculator.html">Conception Date Calculator</a>
+                <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a>
+                <a href="due-date-calculator.html">Due Date Calculator</a>
+                <a href="contraction-timer.html">Contraction Timer</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p class="footer-links">
+                <a href="about.html">About</a>
+                <a href="editorial-policy.html">Editorial policy</a>
+                <a href="privacy.html">Privacy</a>
+            </p>
+            <p class="footer-tools"><strong>Tools:</strong> <a href="due-date-calculator.html">Due Date Calculator</a> · <a href="ovulation-calculator.html">Ovulation Calculator</a> · <a href="conception-date-calculator.html">Conception Date Calculator</a> · <a href="implantation-calculator.html">Implantation Calculator</a> · <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a> · <a href="ivf-due-date-calculator.html">IVF Due Date Calculator</a> · <a href="contraction-timer.html">Contraction Timer</a> · <a href="corrected-age-calculator.html">Corrected Age Calculator</a> · <a href="index.html">All tools home</a></p>
+            <p class="footer-note">Early Pregnancy Tools is an independent educational project. This IVF due date calculator is not a medical device and does not replace advice from your reproductive centre, midwife or doctor. If you are worried about your pregnancy, contact a healthcare professional.</p>
+            <p class="footer-copy">&copy; 2026 Early Pregnancy Tools</p>
+        </div>
+    </footer>
+
+<script>
+    'use strict';
+
+    var MS_PER_DAY = 86400000;
+    var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var MILESTONES = [
+        { days: 97, label: 'First trimester ends (13 weeks 6 days)' },
+        { days: 195, label: 'Second trimester ends (27 weeks 6 days)' },
+        { days: 259, label: 'Term begins (37 weeks 0 days)' },
+        { days: 280, label: 'Due date (40 weeks 0 days)' }
+    ];
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : String(n);
+    }
+
+    function parseISODate(iso) {
+        if (typeof iso !== 'string') { return null; }
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+        if (!m) { return null; }
+        var y = Number(m[1]);
+        var mo = Number(m[2]);
+        var d = Number(m[3]);
+        if (mo < 1 || mo > 12 || d < 1 || d > 31) { return null; }
+        var serial = Date.UTC(y, mo - 1, d) / MS_PER_DAY;
+        var back = new Date(serial * MS_PER_DAY);
+        if (back.getUTCFullYear() !== y || back.getUTCMonth() !== mo - 1 || back.getUTCDate() !== d) {
+            return null;
+        }
+        return { serial: serial };
+    }
+
+    function serialToISO(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+    }
+
+    function formatLongDate(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return MONTH_NAMES[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    }
+
+    function todaySerial() {
+        var n = new Date();
+        return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / MS_PER_DAY;
+    }
+
+    // day5: 280 - 19 = 261 days after transfer; day3: 280 - 17 = 263.
+    var STAGES = {
+        day5: { addDays: 261, gaAtTransfer: 19, label: 'day 5 blastocyst' },
+        day3: { addDays: 263, gaAtTransfer: 17, label: 'day 3 cleavage-stage embryo' }
+    };
+
+    function calculate(transferISO, stageKey, todayIsoSerial) {
+        var transfer = parseISODate(transferISO);
+        if (!transfer) {
+            return { ok: false, error: 'That transfer date does not exist. Please pick a real calendar date.' };
+        }
+        var stage = STAGES[stageKey];
+        if (!stage) {
+            return { ok: false, error: 'Please choose the embryo stage at transfer.' };
+        }
+        var today = todayIsoSerial;
+        if (transfer.serial > today) {
+            return { ok: false, error: 'The transfer date cannot be in the future. Please check the date and try again.' };
+        }
+
+        var eddSerial = transfer.serial + stage.addDays;
+        var gestationalStart = transfer.serial - stage.gaAtTransfer;
+        var gaDays = today - gestationalStart;
+        var daysToDue = eddSerial - today;
+        var trimester;
+        if (gaDays <= 97) {
+            trimester = 'First trimester';
+        } else if (gaDays <= 195) {
+            trimester = 'Second trimester';
+        } else {
+            trimester = 'Third trimester';
+        }
+        var dueShort;
+        if (daysToDue > 0) {
+            dueShort = daysToDue + ' days';
+        } else if (daysToDue === 0) {
+            dueShort = 'Due today';
+        } else {
+            dueShort = 'Past due by ' + Math.abs(daysToDue) + ' days';
+        }
+        var milestones = [];
+        for (var i = 0; i < MILESTONES.length; i++) {
+            milestones.push({
+                label: MILESTONES[i].label,
+                dateLabel: formatLongDate(gestationalStart + MILESTONES[i].days)
+            });
+        }
+
+        return {
+            ok: true,
+            stageLabel: stage.label,
+            transferLabel: formatLongDate(transfer.serial),
+            eddISO: serialToISO(eddSerial),
+            eddLabel: formatLongDate(eddSerial),
+            gaDays: gaDays,
+            gaWeeks: Math.floor(gaDays / 7),
+            gaRemainder: gaDays % 7,
+            trimester: trimester,
+            dueShort: dueShort,
+            transferGa: '2 weeks ' + (stage.gaAtTransfer - 14) + ' days',
+            milestones: milestones
+        };
+    }
+
+    // ---------- UI wiring ----------
+    var form = document.getElementById('calcForm');
+    var transferInput = document.getElementById('transferDate');
+    var errorBox = document.getElementById('errorBox');
+    var resultsBox = document.getElementById('results');
+    var milestoneBody = document.getElementById('milestoneBody');
+
+    function showError(message) {
+        errorBox.textContent = message;
+        errorBox.hidden = false;
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.hidden = true;
+    }
+
+    function clearResults() {
+        resultsBox.hidden = true;
+        milestoneBody.innerHTML = '';
+    }
+
+    function selectedStage() {
+        var radios = document.getElementsByName('stage');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) { return radios[i].value; }
+        }
+        return 'day5';
+    }
+
+    function render(result) {
+        document.getElementById('resultDate').textContent = result.eddLabel;
+        document.getElementById('resultSub').textContent = 'From a ' + result.stageLabel + ' transferred on ' + result.transferLabel + '.';
+        document.getElementById('resultGa').textContent = result.gaWeeks + ' weeks ' + result.gaRemainder + ' days';
+        document.getElementById('resultTri').textContent = result.trimester;
+        document.getElementById('resultDays').textContent = result.dueShort;
+        document.getElementById('resultTransfer').textContent = result.transferGa;
+
+        var frag = document.createDocumentFragment();
+        for (var i = 0; i < result.milestones.length; i++) {
+            var tr = document.createElement('tr');
+            var th = document.createElement('td');
+            th.textContent = result.milestones[i].label;
+            var td = document.createElement('td');
+            td.textContent = result.milestones[i].dateLabel;
+            tr.appendChild(th);
+            tr.appendChild(td);
+            frag.appendChild(tr);
+        }
+        milestoneBody.innerHTML = '';
+        milestoneBody.appendChild(frag);
+
+        resultsBox.hidden = false;
+    }
+
+    function update(showErrors) {
+        if (!transferInput.value) {
+            clearResults();
+            if (showErrors) {
+                showError('Please choose your embryo transfer date.');
+            } else {
+                hideError();
+            }
+            return;
+        }
+        var result = calculate(transferInput.value, selectedStage(), todaySerial());
+        if (!result.ok) {
+            clearResults();
+            showError(result.error);
+            return;
+        }
+        hideError();
+        render(result);
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        update(true);
+    });
+
+    transferInput.addEventListener('input', function () { update(false); });
+    transferInput.addEventListener('change', function () { update(true); });
+
+    var radios = document.getElementsByName('stage');
+    for (var i = 0; i < radios.length; i++) {
+        radios[i].addEventListener('change', function () { update(true); });
+    }
+</script>
+</body>
+</html>

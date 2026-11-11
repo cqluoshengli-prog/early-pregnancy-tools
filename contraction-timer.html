@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contraction Timer: Track Frequency and Duration</title>
+<meta name="description" content="A free contraction timer that records how long each contraction lasts and how far apart they are. See the last hour at a glance and the 5-1-1 pattern explained.">
+<meta name="author" content="Early Pregnancy Tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FFF8F3">
+<link rel="canonical" href="https://www.earlypregnancytools.com/contraction-timer.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Contraction Timer: Track Frequency and Duration">
+<meta property="og:description" content="Time each contraction with one button. See duration, interval and the last hour at a glance, with the 5-1-1 pattern and its sources explained.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.earlypregnancytools.com/contraction-timer.html">
+<meta property="og:site_name" content="Early Pregnancy Tools">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contraction Timer: Track Frequency and Duration">
+<meta name="twitter:description" content="Time each contraction with one button, see the duration and the gap between them, and keep the record in your browser.">
+
+<!-- Schema.org: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Contraction Timer",
+  "url": "https://www.earlypregnancytools.com/contraction-timer.html",
+  "description": "A free contraction timer that records the start time and duration of each contraction, calculates the interval between them, and summarises the last hour.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Start and end each contraction with one button",
+    "Show the duration of every contraction in minutes and seconds",
+    "Calculate the interval between the start of consecutive contractions",
+    "Summarise contractions, average duration and average interval for the last hour",
+    "Save the log in the browser so a refresh does not lose it",
+    "Explain the 5-1-1 pattern and when to call a maternity unit"
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What counts as a contraction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A contraction is a tightening of the uterus that builds, peaks and then fades. This timer measures from the moment you press start to the moment you press end, so it records the pattern you feel rather than what a monitor would measure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the 5-1-1 rule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 5-1-1 pattern means contractions about every 5 minutes, each lasting about 1 minute, continuing for 1 hour. It is the rule many maternity units teach as the point to call. ACOG patient guidance and NHS guidance on the signs that labour has begun both describe regular contractions that become stronger, longer and closer together as the signal to contact your maternity service. Your unit may use a different number, so follow the instructions you were given."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this timer tell me whether I am in labour?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It records timing only. It cannot tell true labour from Braxton Hicks contractions, and it cannot assess your cervix or your baby. Those judgements need a clinician, which is why the page never labels a pattern as labour."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where are my contraction records stored?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In your browser's local storage on this device. Nothing is uploaded to a server. Clearing your browser data, using a different browser or using private browsing may remove the records, so note down anything you want to show your midwife."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.earlypregnancytools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contraction Timer",
+      "item": "https://www.earlypregnancytools.com/contraction-timer.html"
+    }
+  ]
+}
+</script>
+
+<style>
+    :root {
+        --coral: #E8835A;
+        --coral-deep: #A94E2A;
+        --coral-tint: #FCE7DB;
+        --bg: #FFF8F3;
+        --surface: #FFFFFF;
+        --text: #3D322C;
+        --muted: #7C6A5F;
+        --line: #EFDCD0;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(61, 50, 44, 0.06);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .wrap {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 248, 243, 0.94);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        min-height: 44px;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--coral-tint);
+        color: var(--coral-deep);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        background: #F8D9C9;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+        padding: 40px 0 24px;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .lede {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+    }
+
+    /* ---------- Calculator ---------- */
+    .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .field label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .field input {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        background: #FFFFFF;
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 1px;
+        border-color: var(--coral);
+    }
+
+    .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        background: var(--coral-deep);
+        color: #FFFFFF;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: #8E3F1F;
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .btn--ghost {
+        background: #FFFFFF;
+        color: var(--coral-deep);
+        border: 1.5px solid var(--coral);
+    }
+
+    .btn--ghost:hover {
+        background: var(--coral-tint);
+    }
+
+    .form-note {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .error {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border: 1px solid #EFC3AE;
+        border-left-width: 4px;
+        border-radius: 12px;
+        background: #FDEDE7;
+        color: #9A3A19;
+        font-size: 0.92rem;
+    }
+
+    .error[hidden] {
+        display: none;
+    }
+
+    /* ---------- Results ---------- */
+    .results {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+        display: none;
+    }
+
+    .result-hero {
+        text-align: center;
+        padding: 24px 16px;
+        border: 1px solid #F7DCCB;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #FFF1E8 0%, #FFF8F3 100%);
+    }
+
+    .result-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+
+    .result-date {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--coral-deep);
+    }
+
+    .result-sub {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .stat {
+        background: #FFF3EC;
+        border-radius: 12px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .progress-block {
+        margin-top: 24px;
+    }
+
+    .progress-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .progress-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #F6E7DC;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 999px;
+        background: var(--coral-deep);
+        transition: width 0.25s ease;
+    }
+
+    .progress-legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 0.7rem;
+        color: var(--muted);
+    }
+
+    .results h3 {
+        margin: 24px 0 8px;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+    }
+
+    .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px 16px;
+        text-align: left;
+        border-bottom: 1px solid #F6E7DC;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #FFF3EC;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    td:last-child {
+        font-weight: 600;
+    }
+
+    .download-block {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed #EAC7B4;
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .download-note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .download-note:empty {
+        display: none;
+    }
+
+    /* ---------- Content sections ---------- */
+    .content {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+    }
+
+    .content h3 {
+        font-size: 1.02rem;
+        margin: 20px 0 8px;
+    }
+
+    .content p {
+        margin-bottom: 12px;
+        color: #4C4039;
+    }
+
+    .content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .content ul, .content ol {
+        margin: 0 0 12px 20px;
+    }
+
+    .content li {
+        margin-bottom: 6px;
+        color: #4C4039;
+    }
+
+    .content a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .formula {
+        margin: 12px 0;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF3EC;
+        border-left: 3px solid var(--coral);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+        color: #5A4638;
+    }
+
+    .note {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF1E8;
+        border: 1px solid #F7DCCB;
+        font-size: 0.9rem;
+        color: #6B5145;
+    }
+
+    .note strong {
+        color: #9A3A19;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+        border-bottom: 1px solid #F6E7DC;
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        padding: 16px 32px 16px 0;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 12px;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        color: var(--coral);
+    }
+
+    .faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .faq-item p {
+        padding-bottom: 16px;
+        margin: 0;
+        color: #4C4039;
+        font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding: 32px 0 40px;
+        font-size: 0.88rem;
+        color: var(--muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .footer-tools {
+        margin-bottom: 16px;
+        line-height: 1.8;
+    }
+
+    .footer-tools strong {
+        color: var(--text);
+    }
+
+    .site-footer a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .footer-note {
+        max-width: 68ch;
+        margin-bottom: 16px;
+    }
+
+    .footer-copy {
+        font-size: 0.82rem;
+        color: #A08C80;
+    }
+
+    @media (min-width: 560px) {
+        .form-grid {
+            grid-template-columns: 1.2fr 1fr;
+            align-items: start;
+        }
+
+        .form-grid .btn,
+        .form-grid .form-note {
+            grid-column: 1 / -1;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 720px) {
+        .hero {
+            padding: 48px 0 24px;
+        }
+
+        .calc-card,
+        .content {
+            padding: 32px;
+        }
+    }
+
+    .page-meta {
+        margin-top: 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .related {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .related a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .related a:hover {
+        border-color: var(--coral);
+    }
+
+    .footer-copy {
+        color: var(--muted);
+    }
+
+    .timer-actions {
+        display: grid;
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    @media (min-width: 560px) {
+        .timer-actions {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html">
+                <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <path d="M16 28.5c-1.2 0-10.5-6.2-10.5-13.4A6.1 6.1 0 0 1 16 10.6a6.1 6.1 0 0 1 10.5 4.5c0 7.2-9.3 13.4-10.5 13.4z" fill="#E8835A"/>
+                    <circle cx="16" cy="15.4" r="3.4" fill="#FFF8F3"/>
+                </svg>
+                <span>Early Pregnancy Tools</span>
+            </a>
+            <a class="nav-link" href="index.html">← All tools</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="eyebrow">Labour tool</p>
+            <h1>Contraction Timer</h1>
+            <p class="lede">Press start when a contraction begins and end when it fades. The timer records each duration, works out the gap between contractions, and shows the last hour at a glance — so you can describe the pattern to your midwife.</p>
+            <p class="page-meta">Last updated: <time datetime="2026-11-11">November 11, 2026</time></p>
+        </section>
+
+        <section class="calc-card" aria-labelledby="timer-heading">
+            <h2 id="timer-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Contraction timer</h2>
+
+            <div class="result-hero">
+                <p class="result-label" id="timerLabel">Ready</p>
+                <p class="result-date" id="timerDisplay">00:00</p>
+                <p class="result-sub" id="timerSub">Press start when a contraction begins.</p>
+            </div>
+
+            <div class="timer-actions">
+                <button type="button" class="btn" id="toggleBtn">Start contraction</button>
+                <button type="button" class="btn btn--ghost" id="clearBtn">Clear all records</button>
+            </div>
+
+            <noscript>
+                <p class="error">This contraction timer needs JavaScript. Please enable it in your browser and reload the page.</p>
+            </noscript>
+
+            <div class="results">
+                <div class="stat-grid">
+                    <div class="stat">
+                        <p class="stat-label">In the last hour</p>
+                        <p class="stat-value" id="statCount">0</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Average duration</p>
+                        <p class="stat-value" id="statDuration">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Average interval</p>
+                        <p class="stat-value" id="statInterval">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Total recorded</p>
+                        <p class="stat-value" id="statTotal">0</p>
+                    </div>
+                </div>
+
+                <div class="note">
+                    <strong>When to call.</strong> If contractions come about every 5 minutes, last about 1 minute each and have continued for 1 hour (the 5-1-1 pattern), contact your maternity unit. Before 37 weeks, call straight away for regular contractions, bleeding or fluid leaking — do not wait for 5-1-1.
+                </div>
+
+                <h3>Contraction log</h3>
+                <div class="table-wrap">
+                    <table>
+                        <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Each recorded contraction with its start time, duration and the interval from the previous contraction</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Start</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Interval</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logBody"></tbody>
+                    </table>
+                </div>
+
+                <p class="form-note" id="saveNote">Records are saved in this browser only. Nothing is uploaded.</p>
+                <p class="form-note">This is information only. It cannot replace an assessment by your midwife, doctor or hospital.</p>
+            </div>
+        </section>
+
+        <section class="content">
+            <h2>How this contraction timer works</h2>
+            <p>The timer records the clock time at the moment you press each button. Everything else is arithmetic on those two timestamps.</p>
+            <div class="formula">
+                Duration = end time − start time<br>
+                Interval = start of this contraction − start of the previous contraction<br>
+                Last hour = contractions whose start falls within the previous 60 minutes<br>
+                Average duration = total duration ÷ number of completed contractions in that hour<br>
+                Average interval = total gap ÷ number of gaps between those contractions
+            </div>
+            <ul>
+                <li><strong>Interval is measured from start to start.</strong> That is the convention maternity units use, and it is not the same as the rest between contractions.</li>
+                <li><strong>The last-hour summary moves with the clock.</strong> Counts and averages only include contractions that started in the previous 60 minutes, so an old record does not make the pattern look stronger than it is.</li>
+                <li><strong>The clock refreshes once a second</strong> while a contraction is in progress and stops when you end it, so the page is not running a timer in the background.</li>
+                <li><strong>Records live in your browser.</strong> They survive a refresh on the same device, and they are never sent anywhere. Clearing site data removes them.</li>
+            </ul>
+        </section>
+
+        <section class="content">
+            <h2>The 5-1-1 pattern and when to call</h2>
+            <p>The 5-1-1 pattern means contractions about every 5 minutes, each lasting about 1 minute, continuing for 1 hour. It is the rule many maternity units teach as the point to call. ACOG patient guidance and NHS guidance on the signs that labour has begun both describe regular contractions that become stronger, longer and closer together as the signal to contact your maternity service; 5-1-1 is the shorthand most units use for that advice.</p>
+            <p>Your unit may use a different number — 4-1-1, or an earlier call for a second baby. Follow the instructions you were given rather than a general rule from a website.</p>
+            <h3>Before 37 weeks</h3>
+            <p>If you are less than 37 weeks pregnant and have regular contractions, bleeding or fluid leaking, contact your maternity unit straight away. Do not wait for a 5-1-1 pattern, and do not use this page to decide whether the contractions are labour.</p>
+            <p><strong>Sources:</strong> <a href="https://www.acog.org/womens-health/faqs/preterm-labor-and-birth" rel="noopener">ACOG — Preterm labor and birth</a>, <a href="https://www.acog.org/" rel="noopener">ACOG</a> and <a href="https://www.nhs.uk/pregnancy/labour-and-birth/signs-that-labour-has-begun/" rel="noopener">NHS — Signs that labour has begun</a>.</p>
+        </section>
+
+        <section class="content">
+            <h2>What this timer cannot tell you</h2>
+            <p>This is a recording tool, not an assessment. It cannot tell true labour from Braxton Hicks contractions, it cannot measure how your cervix is changing, and it cannot check on your baby. Only a clinician can do those things.</p>
+            <p>Stop timing and contact your maternity unit or emergency service immediately if you have:</p>
+            <ul>
+                <li>Reduced or changed fetal movement.</li>
+                <li>Any vaginal bleeding.</li>
+                <li>Fluid leaking or a gush of fluid.</li>
+                <li>Severe or constant abdominal pain, or pain that does not ease between contractions.</li>
+                <li>Any symptom that frightens you.</li>
+            </ul>
+            <div class="note">
+                <strong>Not medical advice.</strong> Early Pregnancy Tools is an educational timer. It does not diagnose labour, does not assess your baby and does not decide when you should go to hospital. Always follow the advice of your midwife, doctor or maternity unit.
+            </div>
+        </section>
+
+        <section class="content" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details class="faq-item">
+                <summary>What counts as a contraction?</summary>
+                <p>A contraction is a tightening of the uterus that builds, peaks and then fades. This timer measures from the moment you press start to the moment you press end, so it records the pattern you feel rather than what a monitor would measure.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What is the 5-1-1 rule?</summary>
+                <p>The 5-1-1 pattern means contractions about every 5 minutes, each lasting about 1 minute, continuing for 1 hour. It is the rule many maternity units teach as the point to call. ACOG patient guidance and NHS guidance on the signs that labour has begun both describe regular contractions that become stronger, longer and closer together as the signal to contact your maternity service. Your unit may use a different number, so follow the instructions you were given.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Does this timer tell me whether I am in labour?</summary>
+                <p>No. It records timing only. It cannot tell true labour from Braxton Hicks contractions, and it cannot assess your cervix or your baby. Those judgements need a clinician, which is why the page never labels a pattern as labour.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Where are my contraction records stored?</summary>
+                <p>In your browser's local storage on this device. Nothing is uploaded to a server. Clearing your browser data, using a different browser or using private browsing may remove the records, so note down anything you want to show your midwife.</p>
+            </details>
+        </section>
+
+        <section class="content">
+            <h2>Sources and disclaimer</h2>
+            <p>Sources used for the timing guidance and the warning signs on this page:</p>
+            <ul>
+                <li><a href="https://www.acog.org/womens-health/faqs/preterm-labor-and-birth" rel="noopener">ACOG — Preterm labor and birth</a> (American College of Obstetricians and Gynecologists).</li>
+                <li><a href="https://www.acog.org/" rel="noopener">ACOG — The American College of Obstetricians and Gynecologists</a>, for its patient guidance on labour and when to call.</li>
+                <li><a href="https://www.nhs.uk/pregnancy/labour-and-birth/signs-that-labour-has-begun/" rel="noopener">NHS — Signs that labour has begun</a> (UK National Health Service).</li>
+                <li><a href="https://www.nhs.uk/" rel="noopener">NHS — National Health Service</a>, for general guidance on pregnancy and labour.</li>
+            </ul>
+            <p>This page is informational only and is not a medical device. It does not create a clinician–patient relationship and must not be used to make medical decisions. If you are unsure whether to call, call — maternity units expect the question.</p>
+            <p>Your records stay in this browser tab and in its local storage. Nothing is uploaded, stored on a server or shared.</p>
+        </section>
+
+        <section class="content">
+            <h2>Related tools</h2>
+            <p>The <a href="pregnancy-week-tracker.html">printable pregnancy week tracker</a> gives you one line per week for appointments and notes. If you are unsure how far along you are, the <a href="due-date-calculator.html">due date calculator</a> shows your gestational age in weeks and days.</p>
+            <div class="related">
+                <a href="index.html">All tools</a>
+                <a href="pregnancy-week-tracker.html">Pregnancy Week Tracker</a>
+                <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a>
+                <a href="corrected-age-calculator.html">Corrected Age Calculator</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p class="footer-links">
+                <a href="about.html">About</a>
+                <a href="editorial-policy.html">Editorial policy</a>
+                <a href="privacy.html">Privacy</a>
+            </p>
+            <p class="footer-tools"><strong>Tools:</strong> <a href="due-date-calculator.html">Due Date Calculator</a> · <a href="ovulation-calculator.html">Ovulation Calculator</a> · <a href="conception-date-calculator.html">Conception Date Calculator</a> · <a href="implantation-calculator.html">Implantation Calculator</a> · <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a> · <a href="ivf-due-date-calculator.html">IVF Due Date Calculator</a> · <a href="contraction-timer.html">Contraction Timer</a> · <a href="corrected-age-calculator.html">Corrected Age Calculator</a> · <a href="index.html">All tools home</a></p>
+            <p class="footer-note">Early Pregnancy Tools is an independent educational project. This contraction timer is not a medical device and does not replace advice from your midwife, doctor or maternity unit. If you are worried about your pregnancy or your baby, contact a healthcare professional.</p>
+            <p class="footer-copy">&copy; 2026 Early Pregnancy Tools</p>
+        </div>
+    </footer>
+
+<script>
+    'use strict';
+
+    var STORAGE_KEY = 'ept-contraction-log-v1';
+    var HOUR_MS = 3600000;
+    var MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    var entries = [];
+    var activeStart = null;
+    var tickId = null;
+
+    var labelEl = document.getElementById('timerLabel');
+    var displayEl = document.getElementById('timerDisplay');
+    var subEl = document.getElementById('timerSub');
+    var toggleBtn = document.getElementById('toggleBtn');
+    var clearBtn = document.getElementById('clearBtn');
+    var logBody = document.getElementById('logBody');
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : String(n);
+    }
+
+    function formatDuration(ms) {
+        if (!isFinite(ms) || ms < 0) { ms = 0; }
+        var total = Math.floor(ms / 1000);
+        var minutes = Math.floor(total / 60);
+        var seconds = total % 60;
+        return pad2(minutes) + ':' + pad2(seconds);
+    }
+
+    function formatClock(ms) {
+        var d = new Date(ms);
+        return pad2(d.getHours()) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds());
+    }
+
+    function formatStart(ms) {
+        var d = new Date(ms);
+        var now = new Date();
+        var sameDay = d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+        if (sameDay) { return formatClock(ms); }
+        return MONTH_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + formatClock(ms);
+    }
+
+    // ---------- Storage ----------
+    function loadEntries() {
+        var raw = null;
+        try {
+            raw = window.localStorage.getItem(STORAGE_KEY);
+        } catch (e) {
+            return;
+        }
+        if (!raw) { return; }
+        var parsed = null;
+        try {
+            parsed = JSON.parse(raw);
+        } catch (e) {
+            parsed = null;
+        }
+        if (!Array.isArray(parsed)) { return; }
+        for (var i = 0; i < parsed.length; i++) {
+            var item = parsed[i];
+            if (!item || typeof item.start !== 'number' || !isFinite(item.start)) { continue; }
+            var end = null;
+            if (typeof item.end === 'number' && isFinite(item.end) && item.end > item.start) {
+                end = item.end;
+            }
+            entries.push({ start: item.start, end: end });
+        }
+        entries.sort(function (a, b) { return a.start - b.start; });
+    }
+
+    function saveEntries() {
+        try {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        } catch (e) {
+            // Private browsing or a full quota: the timer still works for this session.
+        }
+    }
+
+    // ---------- Timer ----------
+    function startTicking() {
+        if (tickId !== null) { return; }
+        tickId = window.setInterval(function () { renderAll(); }, 1000);
+    }
+
+    function stopTicking() {
+        if (tickId === null) { return; }
+        window.clearInterval(tickId);
+        tickId = null;
+    }
+
+    function computeStats() {
+        var now = Date.now();
+        var from = now - HOUR_MS;
+        var recent = [];
+        var i;
+        for (i = 0; i < entries.length; i++) {
+            if (entries[i].start >= from) { recent.push(entries[i]); }
+        }
+        var durationSum = 0;
+        var durationCount = 0;
+        for (i = 0; i < recent.length; i++) {
+            if (recent[i].end !== null) {
+                durationSum += recent[i].end - recent[i].start;
+                durationCount++;
+            }
+        }
+        var intervalSum = 0;
+        var intervalCount = 0;
+        for (i = 1; i < recent.length; i++) {
+            intervalSum += recent[i].start - recent[i - 1].start;
+            intervalCount++;
+        }
+        return {
+            count: recent.length,
+            averageDuration: durationCount ? durationSum / durationCount : null,
+            averageInterval: intervalCount ? intervalSum / intervalCount : null,
+            total: entries.length
+        };
+    }
+
+    function renderTimer() {
+        var now = Date.now();
+        if (activeStart !== null) {
+            labelEl.textContent = 'Contraction in progress';
+            displayEl.textContent = formatDuration(now - activeStart);
+            subEl.textContent = 'Started at ' + formatClock(activeStart) + '. Press end when it fades.';
+            toggleBtn.textContent = 'End contraction';
+            return;
+        }
+        if (entries.length > 0) {
+            var last = entries[entries.length - 1];
+            var duration = last.end !== null ? last.end - last.start : now - last.start;
+            labelEl.textContent = 'Last contraction';
+            displayEl.textContent = formatDuration(duration);
+            subEl.textContent = 'Started at ' + formatStart(last.start) + '. Press start when the next one begins.';
+            toggleBtn.textContent = 'Start contraction';
+            return;
+        }
+        labelEl.textContent = 'Ready';
+        displayEl.textContent = '00:00';
+        subEl.textContent = 'Press start when a contraction begins.';
+        toggleBtn.textContent = 'Start contraction';
+    }
+
+    function renderStats() {
+        var stats = computeStats();
+        document.getElementById('statCount').textContent = String(stats.count);
+        document.getElementById('statDuration').textContent = stats.averageDuration === null ? '—' : formatDuration(stats.averageDuration);
+        document.getElementById('statInterval').textContent = stats.averageInterval === null ? '—' : formatDuration(stats.averageInterval);
+        document.getElementById('statTotal').textContent = String(stats.total);
+    }
+
+    function renderTable() {
+        var frag = document.createDocumentFragment();
+        if (entries.length === 0) {
+            var emptyRow = document.createElement('tr');
+            var emptyCell = document.createElement('td');
+            emptyCell.colSpan = 4;
+            emptyCell.textContent = 'No contractions recorded yet.';
+            emptyRow.appendChild(emptyCell);
+            frag.appendChild(emptyRow);
+        } else {
+            var now = Date.now();
+            for (var i = entries.length - 1; i >= 0; i--) {
+                var entry = entries[i];
+                var duration = entry.end !== null ? entry.end - entry.start : now - entry.start;
+                var interval = i > 0 ? entry.start - entries[i - 1].start : null;
+
+                var tr = document.createElement('tr');
+                var numberCell = document.createElement('td');
+                numberCell.textContent = String(i + 1);
+                var startCell = document.createElement('td');
+                startCell.textContent = formatStart(entry.start);
+                var durationCell = document.createElement('td');
+                durationCell.textContent = formatDuration(duration);
+                var intervalCell = document.createElement('td');
+                intervalCell.textContent = interval === null ? '—' : formatDuration(interval);
+
+                tr.appendChild(numberCell);
+                tr.appendChild(startCell);
+                tr.appendChild(durationCell);
+                tr.appendChild(intervalCell);
+                frag.appendChild(tr);
+            }
+        }
+        logBody.innerHTML = '';
+        logBody.appendChild(frag);
+    }
+
+    function renderAll() {
+        renderTimer();
+        renderStats();
+        renderTable();
+    }
+
+    // ---------- Actions ----------
+    function toggleContraction() {
+        if (activeStart === null) {
+            activeStart = Date.now();
+            entries.push({ start: activeStart, end: null });
+            saveEntries();
+            startTicking();
+            renderAll();
+            return;
+        }
+        var last = entries[entries.length - 1];
+        var end = Date.now();
+        last.end = end > last.start ? end : last.start + 1000;
+        activeStart = null;
+        stopTicking();
+        saveEntries();
+        renderAll();
+    }
+
+    function clearAll() {
+        if (entries.length === 0) { return; }
+        var confirmed = window.confirm('Delete all recorded contractions? This cannot be undone.');
+        if (!confirmed) { return; }
+        entries = [];
+        activeStart = null;
+        stopTicking();
+        saveEntries();
+        renderAll();
+    }
+
+    toggleBtn.addEventListener('click', toggleContraction);
+    clearBtn.addEventListener('click', clearAll);
+
+    // ---------- Start-up ----------
+    loadEntries();
+    if (entries.length > 0 && entries[entries.length - 1].end === null) {
+        activeStart = entries[entries.length - 1].start;
+        startTicking();
+    }
+    renderAll();
+</script>
+</body>
+</html>

@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corrected Age Calculator for Premature Babies</title>
+<meta name="description" content="Work out your premature baby's corrected age from their birth date and gestational age at birth. See chronological age, the due date and when corrected age reaches 24 months.">
+<meta name="author" content="Early Pregnancy Tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FFF8F3">
+<link rel="canonical" href="https://www.earlypregnancytools.com/corrected-age-calculator.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Corrected Age Calculator for Premature Babies">
+<meta property="og:description" content="Enter a birth date and gestational age at birth to see corrected age, chronological age and the date corrected age reaches 24 months, with AAP and NHS sources.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.earlypregnancytools.com/corrected-age-calculator.html">
+<meta property="og:site_name" content="Early Pregnancy Tools">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Corrected Age Calculator for Premature Babies">
+<meta name="twitter:description" content="See your premature baby's corrected age, chronological age and the date corrected age reaches 24 months.">
+
+<!-- Schema.org: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Corrected Age Calculator",
+  "url": "https://www.earlypregnancytools.com/corrected-age-calculator.html",
+  "description": "A free calculator that converts a premature baby's chronological age into corrected age using the birth date and gestational age at birth.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Show chronological age in weeks and days as well as months",
+    "Calculate the number of weeks early and the estimated due date",
+    "Calculate corrected age from the due date",
+    "Show the calendar date on which corrected age reaches 24 months",
+    "Handle babies born at term without applying a correction",
+    "No sign-up and no data uploaded"
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is corrected age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Corrected age is your baby's age counted from their estimated due date rather than from their birth date. It is calculated by taking the number of weeks early your baby was born away from their chronological age. A baby born 6 weeks early who is now 12 weeks old has a corrected age of 6 weeks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When do I stop using corrected age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The American Academy of Pediatrics advises using corrected age for developmental assessment until about 24 months. After that, the difference between corrected and chronological age is small enough that chronological age is used. This page shows the calendar date on which corrected age reaches 24 months so you can see the end point."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do vaccinations use corrected age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Immunisations are scheduled by your baby's actual date of birth, not by the corrected age. The NHS vaccination schedule and AAP guidance both use chronological age, so a premature baby should not have vaccinations delayed because of the correction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My baby was born at 37 weeks — do I need a corrected age?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. From 37 weeks the birth is counted as term, so there is no correction to apply and corrected age is the same as chronological age. This calculator says so explicitly rather than showing a small artificial adjustment."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.earlypregnancytools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Corrected Age Calculator",
+      "item": "https://www.earlypregnancytools.com/corrected-age-calculator.html"
+    }
+  ]
+}
+</script>
+
+<style>
+    :root {
+        --coral: #E8835A;
+        --coral-deep: #A94E2A;
+        --coral-tint: #FCE7DB;
+        --bg: #FFF8F3;
+        --surface: #FFFFFF;
+        --text: #3D322C;
+        --muted: #7C6A5F;
+        --line: #EFDCD0;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(61, 50, 44, 0.06);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .wrap {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 248, 243, 0.94);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        min-height: 44px;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--coral-tint);
+        color: var(--coral-deep);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        background: #F8D9C9;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+        padding: 40px 0 24px;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .lede {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+    }
+
+    /* ---------- Calculator ---------- */
+    .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .field label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .field input {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        background: #FFFFFF;
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 1px;
+        border-color: var(--coral);
+    }
+
+    .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        background: var(--coral-deep);
+        color: #FFFFFF;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: #8E3F1F;
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .btn--ghost {
+        background: #FFFFFF;
+        color: var(--coral-deep);
+        border: 1.5px solid var(--coral);
+    }
+
+    .btn--ghost:hover {
+        background: var(--coral-tint);
+    }
+
+    .form-note {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .error {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border: 1px solid #EFC3AE;
+        border-left-width: 4px;
+        border-radius: 12px;
+        background: #FDEDE7;
+        color: #9A3A19;
+        font-size: 0.92rem;
+    }
+
+    .error[hidden] {
+        display: none;
+    }
+
+    /* ---------- Results ---------- */
+    .results {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+        display: none;
+    }
+
+    .result-hero {
+        text-align: center;
+        padding: 24px 16px;
+        border: 1px solid #F7DCCB;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #FFF1E8 0%, #FFF8F3 100%);
+    }
+
+    .result-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+
+    .result-date {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--coral-deep);
+    }
+
+    .result-sub {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .stat {
+        background: #FFF3EC;
+        border-radius: 12px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .progress-block {
+        margin-top: 24px;
+    }
+
+    .progress-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .progress-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #F6E7DC;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 999px;
+        background: var(--coral-deep);
+        transition: width 0.25s ease;
+    }
+
+    .progress-legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 0.7rem;
+        color: var(--muted);
+    }
+
+    .results h3 {
+        margin: 24px 0 8px;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+    }
+
+    .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px 16px;
+        text-align: left;
+        border-bottom: 1px solid #F6E7DC;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #FFF3EC;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    td:last-child {
+        font-weight: 600;
+    }
+
+    .download-block {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed #EAC7B4;
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .download-note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .download-note:empty {
+        display: none;
+    }
+
+    /* ---------- Content sections ---------- */
+    .content {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+    }
+
+    .content h3 {
+        font-size: 1.02rem;
+        margin: 20px 0 8px;
+    }
+
+    .content p {
+        margin-bottom: 12px;
+        color: #4C4039;
+    }
+
+    .content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .content ul, .content ol {
+        margin: 0 0 12px 20px;
+    }
+
+    .content li {
+        margin-bottom: 6px;
+        color: #4C4039;
+    }
+
+    .content a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .formula {
+        margin: 12px 0;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF3EC;
+        border-left: 3px solid var(--coral);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+        color: #5A4638;
+    }
+
+    .note {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF1E8;
+        border: 1px solid #F7DCCB;
+        font-size: 0.9rem;
+        color: #6B5145;
+    }
+
+    .note strong {
+        color: #9A3A19;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+        border-bottom: 1px solid #F6E7DC;
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        padding: 16px 32px 16px 0;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 12px;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        color: var(--coral);
+    }
+
+    .faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .faq-item p {
+        padding-bottom: 16px;
+        margin: 0;
+        color: #4C4039;
+        font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding: 32px 0 40px;
+        font-size: 0.88rem;
+        color: var(--muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .footer-tools {
+        margin-bottom: 16px;
+        line-height: 1.8;
+    }
+
+    .footer-tools strong {
+        color: var(--text);
+    }
+
+    .site-footer a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .footer-note {
+        max-width: 68ch;
+        margin-bottom: 16px;
+    }
+
+    .footer-copy {
+        font-size: 0.82rem;
+        color: #A08C80;
+    }
+
+    @media (min-width: 560px) {
+        .form-grid {
+            grid-template-columns: 1.2fr 1fr;
+            align-items: start;
+        }
+
+        .form-grid .btn,
+        .form-grid .form-note {
+            grid-column: 1 / -1;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 720px) {
+        .hero {
+            padding: 48px 0 24px;
+        }
+
+        .calc-card,
+        .content {
+            padding: 32px;
+        }
+    }
+
+    .page-meta {
+        margin-top: 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .related {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .related a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .related a:hover {
+        border-color: var(--coral);
+    }
+
+    .footer-copy {
+        color: var(--muted);
+    }
+
+    .field-pair {
+        display: grid;
+        gap: 12px;
+    }
+
+    .mode-fieldset {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 16px 16px;
+        margin: 0;
+        min-width: 0;
+    }
+
+    .mode-fieldset legend {
+        padding: 0 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .form-grid .mode-fieldset,
+    .form-grid .field--full {
+        grid-column: 1 / -1;
+    }
+
+    @media (min-width: 420px) {
+        .field-pair {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+    }
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html">
+                <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <path d="M16 28.5c-1.2 0-10.5-6.2-10.5-13.4A6.1 6.1 0 0 1 16 10.6a6.1 6.1 0 0 1 10.5 4.5c0 7.2-9.3 13.4-10.5 13.4z" fill="#E8835A"/>
+                    <circle cx="16" cy="15.4" r="3.4" fill="#FFF8F3"/>
+                </svg>
+                <span>Early Pregnancy Tools</span>
+            </a>
+            <a class="nav-link" href="index.html">← All tools</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="eyebrow">Baby tool</p>
+            <h1>Corrected Age Calculator</h1>
+            <p class="lede">Corrected age is your baby's age counted from their due date rather than their birth date. Enter the birth date and the gestational age at birth to see both ages side by side, the due date, and when corrected age reaches 24 months.</p>
+            <p class="page-meta">Last updated: <time datetime="2026-11-11">November 11, 2026</time></p>
+        </section>
+
+        <section class="calc-card" aria-labelledby="calc-heading">
+            <h2 id="calc-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Enter your baby's details</h2>
+            <form id="calcForm" novalidate>
+                <div class="form-grid">
+                    <div class="field field--full">
+                        <label for="birthDate">Baby's date of birth</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
+                        <span class="hint">The actual date your baby was born.</span>
+                    </div>
+
+                    <fieldset class="mode-fieldset">
+                        <legend>Gestational age at birth</legend>
+                        <div class="field-pair">
+                            <div class="field">
+                                <label for="weeks">Weeks</label>
+                                <input type="number" id="weeks" name="weeks" min="23" max="42" step="1" inputmode="numeric" placeholder="e.g. 34" required>
+                            </div>
+                            <div class="field">
+                                <label for="days">Days</label>
+                                <input type="number" id="days" name="days" min="0" max="6" step="1" inputmode="numeric" value="0" required>
+                            </div>
+                        </div>
+                        <span class="hint">How far along you were when your baby was born. 23 to 42 weeks, plus 0 to 6 days.</span>
+                    </fieldset>
+
+                    <button type="submit" class="btn" id="calcBtn">Calculate corrected age</button>
+                    <p class="form-note">Results update automatically as you fill in the fields. Everything is calculated in your browser.</p>
+                </div>
+            </form>
+
+            <noscript>
+                <p class="error">This corrected age calculator needs JavaScript. Please enable it in your browser and reload the page.</p>
+            </noscript>
+
+            <div class="error" id="errorBox" role="alert" hidden></div>
+
+            <section class="results" id="results" aria-live="polite" hidden>
+                <div class="result-hero">
+                    <p class="result-label">Corrected age</p>
+                    <p class="result-date" id="resultCorrected">—</p>
+                    <p class="result-sub" id="resultSub">—</p>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat">
+                        <p class="stat-label">Chronological age</p>
+                        <p class="stat-value" id="resultChronological">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Corrected age (months)</p>
+                        <p class="stat-value" id="resultCorrectedMonths">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Estimated due date</p>
+                        <p class="stat-value" id="resultDue">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Corrected age 24 months</p>
+                        <p class="stat-value" id="resultTwentyFour">—</p>
+                    </div>
+                </div>
+
+                <h3>Key dates</h3>
+                <div class="table-wrap">
+                    <table>
+                        <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Birth date, estimated due date and the dates on which corrected and chronological age reach 24 months</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Milestone</th>
+                                <th scope="col">Calendar date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="keyDatesBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="note">
+                    <strong>Information only.</strong> This is an arithmetic estimate. It cannot assess your baby's growth or development and cannot replace a review by your health visitor, paediatrician or doctor.
+                </div>
+            </section>
+        </section>
+
+        <section class="content">
+            <h2>How corrected age is calculated</h2>
+            <p>The method is the same one used in neonatal follow-up: count the weeks your baby was born early, then subtract them from the age counted from birth.</p>
+            <div class="formula">
+                Weeks early = 40 weeks − gestational age at birth<br>
+                Estimated due date = birth date + weeks early<br>
+                Corrected age = today − estimated due date<br>
+                Chronological age = today − birth date<br>
+                Corrected age in months = corrected age in days ÷ 30.4375
+            </div>
+            <ul>
+                <li><strong>40 weeks</strong> is 280 days, the standard length of a pregnancy counted from the last period.</li>
+                <li><strong>Days are included.</strong> A baby born at 34 weeks 4 days is 37 days early, not 42, so a partial week is never rounded away.</li>
+                <li><strong>Months use an average length of 30.4375 days</strong> (365.25 ÷ 12). That keeps the figure comparable between months rather than switching length at each calendar month. The weeks-and-days figure is the exact one.</li>
+                <li><strong>Babies born at 37 weeks or later are not corrected.</strong> From 37 weeks the birth is counted as term, so corrected age equals chronological age and the page says so.</li>
+                <li><strong>Corrected age can be below zero.</strong> If your baby is not yet at their due date, the corrected age is negative, which is expected; the page shows it rather than hiding it.</li>
+                <li><strong>All date maths uses whole UTC calendar days</strong>, so a clock change can never shift a result by a day.</li>
+            </ul>
+        </section>
+
+        <section class="content">
+            <h2>Why corrected age is used until 24 months</h2>
+            <p>A baby born early has had less time in the womb, so comparing them with a baby of the same chronological age can make their development look behind when it is following the expected course for their due date. Counting from the due date lines the two up.</p>
+            <p>The American Academy of Pediatrics, through healthychildren.org, explains corrected age as age counted from the due date and advises using it when assessing development in the first two years. This calculator therefore reports the date on which corrected age reaches 24 months, so you can see where that convention ends.</p>
+            <p>Correction is a way of making a fair comparison, not a target. If your baby was born at term, there is nothing to correct, and the page does not apply a correction just because the fields are filled in.</p>
+        </section>
+
+        <section class="content">
+            <h2>Vaccinations and check-ups use chronological age</h2>
+            <p>Corrected age is for developmental assessment. It does not move appointments, and it does not change the vaccination schedule.</p>
+            <p>Immunisations are given by your baby's actual date of birth. The NHS vaccination schedule and AAP guidance both use chronological age, so a premature baby should not have vaccinations delayed because of the correction. The same applies to the routine baby checks booked from the birth date.</p>
+            <p>If a clinician asks for the corrected age, give them the birth date and the gestational age at birth as well; they can then apply their own local convention. Do not skip or postpone an appointment because a corrected age makes your baby look younger.</p>
+        </section>
+
+        <section class="content">
+            <h2>When to ask for advice</h2>
+            <p>Contact your health visitor, paediatrician or family doctor if you are worried about your baby's movement, feeding, growth or development, whatever the corrected age says. A calculator can line up two dates; it cannot examine a baby.</p>
+            <p>If your baby was born before 37 weeks, follow the follow-up schedule your neonatal unit gave you rather than creating one from this page.</p>
+            <div class="note">
+                <strong>Not medical advice.</strong> Early Pregnancy Tools is an educational calculator. It does not assess development, growth or health, and it does not replace the appointments your baby is offered.
+            </div>
+        </section>
+
+        <section class="content" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details class="faq-item">
+                <summary>What is corrected age?</summary>
+                <p>Corrected age is your baby's age counted from their estimated due date rather than from their birth date. It is calculated by taking the number of weeks early your baby was born away from their chronological age. A baby born 6 weeks early who is now 12 weeks old has a corrected age of 6 weeks.</p>
+            </details>
+            <details class="faq-item">
+                <summary>When do I stop using corrected age?</summary>
+                <p>The American Academy of Pediatrics advises using corrected age for developmental assessment until about 24 months. After that, the difference between corrected and chronological age is small enough that chronological age is used. This page shows the calendar date on which corrected age reaches 24 months so you can see the end point.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Do vaccinations use corrected age?</summary>
+                <p>No. Immunisations are scheduled by your baby's actual date of birth, not by the corrected age. The NHS vaccination schedule and AAP guidance both use chronological age, so a premature baby should not have vaccinations delayed because of the correction.</p>
+            </details>
+            <details class="faq-item">
+                <summary>My baby was born at 37 weeks — do I need a corrected age?</summary>
+                <p>No. From 37 weeks the birth is counted as term, so there is no correction to apply and corrected age is the same as chronological age. This calculator says so explicitly rather than showing a small artificial adjustment.</p>
+            </details>
+        </section>
+
+        <section class="content">
+            <h2>Sources and disclaimer</h2>
+            <p>Sources used for the method and the notes on this page:</p>
+            <ul>
+                <li><a href="https://www.healthychildren.org/English/ages-stages/baby/preemie/Pages/Corrected-Age-For-Preemies.aspx" rel="noopener">healthychildren.org (AAP) — Corrected Age for Premature Babies</a>, for the definition of corrected age and its use until 24 months.</li>
+                <li><a href="https://www.healthychildren.org/English/ages-stages/baby/preemie/Pages/Preemie-Milestones.aspx" rel="noopener">healthychildren.org (AAP) — Preemie Milestones</a>, for the developmental context.</li>
+                <li><a href="https://www.nhs.uk/vaccinations/nhs-vaccinations-and-when-to-have-them/" rel="noopener">NHS — Vaccinations and when to have them</a>, for the schedule being based on age from birth.</li>
+                <li><a href="https://www.nhs.uk/" rel="noopener">NHS — National Health Service</a>, for general guidance on baby checks and development.</li>
+            </ul>
+            <p>This page is informational only and is not a medical device. It does not create a clinician–patient relationship and must not be used to make medical decisions about your baby's health or development.</p>
+            <p>Your dates are processed only in this browser tab. Nothing is uploaded, stored or shared.</p>
+        </section>
+
+        <section class="content">
+            <h2>Related tools</h2>
+            <p>The <a href="baby-sleep-schedule.html">baby sleep schedule</a> gives sleep ranges by age, which are usually described by chronological age. The <a href="pregnancy-week-tracker.html">pregnancy week tracker</a> is useful if you are planning a next pregnancy and want to record each week.</p>
+            <div class="related">
+                <a href="index.html">All tools</a>
+                <a href="baby-sleep-schedule.html">Baby Sleep Schedule</a>
+                <a href="contraction-timer.html">Contraction Timer</a>
+                <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p class="footer-links">
+                <a href="about.html">About</a>
+                <a href="editorial-policy.html">Editorial policy</a>
+                <a href="privacy.html">Privacy</a>
+            </p>
+            <p class="footer-tools"><strong>Tools:</strong> <a href="due-date-calculator.html">Due Date Calculator</a> · <a href="ovulation-calculator.html">Ovulation Calculator</a> · <a href="conception-date-calculator.html">Conception Date Calculator</a> · <a href="implantation-calculator.html">Implantation Calculator</a> · <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a> · <a href="ivf-due-date-calculator.html">IVF Due Date Calculator</a> · <a href="contraction-timer.html">Contraction Timer</a> · <a href="corrected-age-calculator.html">Corrected Age Calculator</a> · <a href="index.html">All tools home</a></p>
+            <p class="footer-note">Early Pregnancy Tools is an independent educational project. This corrected age calculator is not a medical device and does not replace advice from your health visitor, paediatrician or doctor. If you are worried about your baby, contact a healthcare professional.</p>
+            <p class="footer-copy">&copy; 2026 Early Pregnancy Tools</p>
+        </div>
+    </footer>
+
+<script>
+    'use strict';
+
+    var MS_PER_DAY = 86400000;
+    var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : String(n);
+    }
+
+    function parseISODate(iso) {
+        if (typeof iso !== 'string') { return null; }
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+        if (!m) { return null; }
+        var y = Number(m[1]);
+        var mo = Number(m[2]);
+        var d = Number(m[3]);
+        if (mo < 1 || mo > 12 || d < 1 || d > 31) { return null; }
+        var serial = Date.UTC(y, mo - 1, d) / MS_PER_DAY;
+        var back = new Date(serial * MS_PER_DAY);
+        if (back.getUTCFullYear() !== y || back.getUTCMonth() !== mo - 1 || back.getUTCDate() !== d) {
+            return null;
+        }
+        return { serial: serial };
+    }
+
+    function serialToISO(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return d.getUTCFullYear() + '-' + pad2(d.getUTCMonth() + 1) + '-' + pad2(d.getUTCDate());
+    }
+
+    function formatLongDate(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return MONTH_NAMES[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    }
+
+    function todaySerial() {
+        var n = new Date();
+        return Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / MS_PER_DAY;
+    }
+
+    // Add whole calendar months, clamping to the last day of a shorter month.
+    function addMonths(serial, months) {
+        var d = new Date(serial * MS_PER_DAY);
+        var total = d.getUTCMonth() + months;
+        var year = d.getUTCFullYear() + Math.floor(total / 12);
+        var month = ((total % 12) + 12) % 12;
+        var lastDay = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+        var day = Math.min(d.getUTCDate(), lastDay);
+        return Date.UTC(year, month, day) / MS_PER_DAY;
+    }
+
+    function toNumber(value) {
+        if (typeof value === 'number') { return value; }
+        if (typeof value === 'string' && value.trim() !== '') { return Number(value.trim()); }
+        return NaN;
+    }
+
+    function ageWeeksDays(totalDays) {
+        var sign = totalDays < 0 ? '\u2212' : '';
+        var abs = Math.abs(totalDays);
+        var weeks = Math.floor(abs / 7);
+        var days = abs % 7;
+        return sign + weeks + (weeks === 1 ? ' week ' : ' weeks ') + days + (days === 1 ? ' day' : ' days');
+    }
+
+    function ageMonths(totalDays) {
+        var months = totalDays / 30.4375;
+        return (months < 0 ? '\u2212' : '') + Math.abs(months).toFixed(1) + ' months';
+    }
+
+    function calculate(params) {
+        var birth = parseISODate(params.birthDate);
+        if (!birth) {
+            return { ok: false, error: 'Please enter a real calendar date for your baby\u2019s birth.' };
+        }
+        var weeks = toNumber(params.weeks);
+        var days = toNumber(params.days);
+        if (!isFinite(weeks) || weeks !== Math.floor(weeks)) {
+            return { ok: false, error: 'Gestational age at birth must be a whole number of weeks between 23 and 42.' };
+        }
+        if (weeks < 23 || weeks > 42) {
+            return { ok: false, error: 'Gestational age at birth must be between 23 and 42 weeks.' };
+        }
+        if (!isFinite(days) || days !== Math.floor(days) || days < 0 || days > 6) {
+            return { ok: false, error: 'Days must be a whole number from 0 to 6.' };
+        }
+        var today = todaySerial();
+        if (birth.serial > today) {
+            return { ok: false, error: 'The birth date cannot be in the future. Please check the date and try again.' };
+        }
+        var gestationalDays = weeks * 7 + days;
+        var term = gestationalDays >= 259;
+        var earlyDays = term ? 0 : 280 - gestationalDays;
+        var chronologicalDays = today - birth.serial;
+        var correctedDays = chronologicalDays - earlyDays;
+        var dueSerial = term ? null : birth.serial + earlyDays;
+        var correctedTwentyFour = term ? addMonths(birth.serial, 24) : addMonths(dueSerial, 24);
+
+        return {
+            ok: true,
+            term: term,
+            weeks: weeks,
+            days: days,
+            gestationalDays: gestationalDays,
+            earlyDays: earlyDays,
+            chronologicalDays: chronologicalDays,
+            correctedDays: correctedDays,
+            dueSerial: dueSerial,
+            dueISO: dueSerial === null ? null : serialToISO(dueSerial),
+            dueLabel: dueSerial === null ? null : formatLongDate(dueSerial),
+            correctedTwentyFourSerial: correctedTwentyFour,
+            correctedTwentyFourLabel: formatLongDate(correctedTwentyFour),
+            chronologicalTwentyFourLabel: formatLongDate(addMonths(birth.serial, 24)),
+            birthLabel: formatLongDate(birth.serial)
+        };
+    }
+
+    // ---------- UI wiring ----------
+    var form = document.getElementById('calcForm');
+    var birthInput = document.getElementById('birthDate');
+    var weeksInput = document.getElementById('weeks');
+    var daysInput = document.getElementById('days');
+    var errorBox = document.getElementById('errorBox');
+    var resultsBox = document.getElementById('results');
+    var keyDatesBody = document.getElementById('keyDatesBody');
+
+    function showError(message) {
+        errorBox.textContent = message;
+        errorBox.hidden = false;
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.hidden = true;
+    }
+
+    function clearResults() {
+        resultsBox.hidden = true;
+        keyDatesBody.innerHTML = '';
+    }
+
+    function addRow(frag, label, value) {
+        var tr = document.createElement('tr');
+        var th = document.createElement('td');
+        th.textContent = label;
+        var td = document.createElement('td');
+        td.textContent = value;
+        tr.appendChild(th);
+        tr.appendChild(td);
+        frag.appendChild(tr);
+    }
+
+    function render(result) {
+        document.getElementById('resultCorrected').textContent = ageWeeksDays(result.correctedDays);
+        document.getElementById('resultChronological').textContent = ageWeeksDays(result.chronologicalDays);
+        document.getElementById('resultCorrectedMonths').textContent = ageMonths(result.correctedDays);
+        document.getElementById('resultDue').textContent = result.term ? 'Term — none' : result.dueLabel;
+        document.getElementById('resultTwentyFour').textContent = result.correctedTwentyFourLabel;
+
+        var sub;
+        var chronologicalMonths = ageMonths(result.chronologicalDays);
+        if (result.term) {
+            sub = 'Born at ' + result.weeks + ' weeks ' + result.days + ' days, which is term, so corrected age equals chronological age: ' + ageWeeksDays(result.chronologicalDays) + ' (' + chronologicalMonths + ').';
+        } else if (result.correctedDays < 0) {
+            sub = 'Born ' + ageWeeksDays(result.earlyDays) + ' early. Chronological age is ' + ageWeeksDays(result.chronologicalDays) + ' (' + chronologicalMonths + '). Your baby is not yet at the due date of ' + result.dueLabel + ', so corrected age is still below zero.';
+        } else {
+            sub = 'Born ' + ageWeeksDays(result.earlyDays) + ' early. Chronological age is ' + ageWeeksDays(result.chronologicalDays) + ' (' + chronologicalMonths + '). Corrected age is ' + ageMonths(result.correctedDays) + ', counted from the due date of ' + result.dueLabel + '.';
+        }
+        document.getElementById('resultSub').textContent = sub;
+
+        var frag = document.createDocumentFragment();
+        addRow(frag, 'Birth date', result.birthLabel);
+        addRow(frag, 'Estimated due date', result.term ? 'Not needed — born at term' : result.dueLabel);
+        addRow(frag, 'Corrected age 24 months', result.correctedTwentyFourLabel);
+        addRow(frag, 'Chronological age 24 months', result.chronologicalTwentyFourLabel);
+        keyDatesBody.innerHTML = '';
+        keyDatesBody.appendChild(frag);
+
+        resultsBox.hidden = false;
+    }
+
+    function update(showErrors) {
+        var values = {
+            birthDate: birthInput.value,
+            weeks: weeksInput.value,
+            days: daysInput.value
+        };
+        var complete = values.birthDate && values.weeks !== '' && values.days !== '';
+        if (!complete) {
+            clearResults();
+            if (showErrors) {
+                showError('Please enter the birth date and the gestational age at birth.');
+            } else {
+                hideError();
+            }
+            return;
+        }
+        var result = calculate(values);
+        if (!result.ok) {
+            clearResults();
+            showError(result.error);
+            return;
+        }
+        hideError();
+        render(result);
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        update(true);
+    });
+
+    var inputs = [birthInput, weeksInput, daysInput];
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function () { update(false); });
+        inputs[i].addEventListener('change', function () { update(true); });
+    }
+</script>
+</body>
+</html>

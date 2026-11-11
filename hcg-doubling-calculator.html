@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hCG Doubling Calculator: Is My hCG Rising Normally?</title>
+<meta name="description" content="Enter two hCG results with their dates and times to see the interval, percentage change, doubling time and projected 48-hour rise, with the ACOG 35% threshold explained.">
+<meta name="author" content="Early Pregnancy Tools">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FFF8F3">
+<link rel="canonical" href="https://www.earlypregnancytools.com/hcg-doubling-calculator.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="hCG Doubling Calculator: Is My hCG Rising Normally?">
+<meta property="og:description" content="Compare two hCG results and see the doubling time and projected 48-hour rise, with the ACOG lower limit and its limits explained.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.earlypregnancytools.com/hcg-doubling-calculator.html">
+<meta property="og:site_name" content="Early Pregnancy Tools">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hCG Doubling Calculator: Is My hCG Rising Normally?">
+<meta name="twitter:description" content="Compare two hCG results and see the doubling time and projected 48-hour rise, with the ACOG lower limit explained.">
+
+<!-- Schema.org: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "hCG Doubling Calculator",
+  "url": "https://www.earlypregnancytools.com/hcg-doubling-calculator.html",
+  "description": "A free calculator that compares two hCG results taken at known times and shows the interval, percentage change, doubling time and the rise projected over 48 hours.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires JavaScript",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Calculate the hours between two hCG samples",
+    "Show the percentage change between the two values",
+    "Calculate hCG doubling time when the second value is higher",
+    "Project the rise over 48 hours from your actual interval",
+    "Compare the result with the 35% lower limit described in ACOG Practice Bulletin 200",
+    "No sign-up and no data uploaded"
+  ]
+}
+</script>
+
+<!-- Schema.org: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is hCG doubling time?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Doubling time is the number of hours hCG would need to double if it kept rising at the same rate as it did between your two samples. This page calculates it as interval in hours multiplied by ln(2), divided by ln(second value divided by first value). It is only shown when the second value is higher than the first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What rise is expected over 48 hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In early pregnancy hCG usually doubles roughly every 48 to 72 hours, and the rise slows as the pregnancy advances. ACOG Practice Bulletin 200 (2018) describes a rise of at least 35% over 48 hours as the lower limit expected in a normal early pregnancy. Normal values vary widely, so a result above or below that line is not a diagnosis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a single hCG level tell me if my pregnancy is OK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Normal hCG values cover a very wide range at any given week, so one number — however high or low — cannot show how a pregnancy is progressing or where it is located. An ultrasound is the key test for confirming the location and development of a pregnancy, and hCG values are interpreted alongside it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is there no doubling time in my result?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The calculator only shows a doubling time when the second hCG value is higher than the first. If the second value is the same or lower, it reports that there is no rise rather than producing a misleading number. That pattern needs to be assessed by a doctor, usually with an ultrasound."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Schema.org: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.earlypregnancytools.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "hCG Doubling Calculator",
+      "item": "https://www.earlypregnancytools.com/hcg-doubling-calculator.html"
+    }
+  ]
+}
+</script>
+
+<style>
+    :root {
+        --coral: #E8835A;
+        --coral-deep: #A94E2A;
+        --coral-tint: #FCE7DB;
+        --bg: #FFF8F3;
+        --surface: #FFFFFF;
+        --text: #3D322C;
+        --muted: #7C6A5F;
+        --line: #EFDCD0;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(61, 50, 44, 0.06);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    .wrap {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 248, 243, 0.94);
+    }
+
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        min-height: 44px;
+    }
+
+    .logo-mark {
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        display: block;
+    }
+
+    .nav-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--coral-tint);
+        color: var(--coral-deep);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .nav-link:hover {
+        background: #F8D9C9;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+        padding: 40px 0 24px;
+    }
+
+    .eyebrow {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 8px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .lede {
+        color: var(--muted);
+        font-size: 1.02rem;
+        max-width: 60ch;
+    }
+
+    /* ---------- Calculator ---------- */
+    .calc-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .field label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .field input {
+        width: 100%;
+        min-width: 0;
+        min-height: 48px;
+        padding: 12px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 12px;
+        background: #FFFFFF;
+        color: var(--text);
+        font: inherit;
+        font-size: 1rem;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 1px;
+        border-color: var(--coral);
+    }
+
+    .hint {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--muted);
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        background: var(--coral-deep);
+        color: #FFFFFF;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .btn:hover {
+        background: #8E3F1F;
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid var(--text);
+        outline-offset: 2px;
+    }
+
+    .btn--ghost {
+        background: #FFFFFF;
+        color: var(--coral-deep);
+        border: 1.5px solid var(--coral);
+    }
+
+    .btn--ghost:hover {
+        background: var(--coral-tint);
+    }
+
+    .form-note {
+        margin-top: 12px;
+        font-size: 0.8rem;
+        color: var(--muted);
+    }
+
+    .error {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border: 1px solid #EFC3AE;
+        border-left-width: 4px;
+        border-radius: 12px;
+        background: #FDEDE7;
+        color: #9A3A19;
+        font-size: 0.92rem;
+    }
+
+    .error[hidden] {
+        display: none;
+    }
+
+    /* ---------- Results ---------- */
+    .results {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+        display: none;
+    }
+
+    .result-hero {
+        text-align: center;
+        padding: 24px 16px;
+        border: 1px solid #F7DCCB;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #FFF1E8 0%, #FFF8F3 100%);
+    }
+
+    .result-label {
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+
+    .result-date {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--coral-deep);
+    }
+
+    .result-sub {
+        margin-top: 8px;
+        font-size: 0.86rem;
+        color: var(--muted);
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .stat {
+        background: #FFF3EC;
+        border-radius: 12px;
+        padding: 16px 12px;
+        text-align: center;
+    }
+
+    .stat-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .progress-block {
+        margin-top: 24px;
+    }
+
+    .progress-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .progress-track {
+        height: 12px;
+        border-radius: 999px;
+        background: #F6E7DC;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        width: 0;
+        border-radius: 999px;
+        background: var(--coral-deep);
+        transition: width 0.25s ease;
+    }
+
+    .progress-legend {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-size: 0.7rem;
+        color: var(--muted);
+    }
+
+    .results h3 {
+        margin: 24px 0 8px;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+    }
+
+    .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 10px 16px;
+        text-align: left;
+        border-bottom: 1px solid #F6E7DC;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #FFF3EC;
+        font-size: 0.72rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    tr:last-child td {
+        border-bottom: none;
+    }
+
+    td:last-child {
+        font-weight: 600;
+    }
+
+    .download-block {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed #EAC7B4;
+        border-radius: 12px;
+        background: #FFFCFA;
+    }
+
+    .download-note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .download-note:empty {
+        display: none;
+    }
+
+    /* ---------- Content sections ---------- */
+    .content {
+        margin-top: 24px;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+        margin-bottom: 12px;
+    }
+
+    .content h3 {
+        font-size: 1.02rem;
+        margin: 20px 0 8px;
+    }
+
+    .content p {
+        margin-bottom: 12px;
+        color: #4C4039;
+    }
+
+    .content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .content ul, .content ol {
+        margin: 0 0 12px 20px;
+    }
+
+    .content li {
+        margin-bottom: 6px;
+        color: #4C4039;
+    }
+
+    .content a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .formula {
+        margin: 12px 0;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF3EC;
+        border-left: 3px solid var(--coral);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.88rem;
+        line-height: 1.7;
+        overflow-wrap: break-word;
+        color: #5A4638;
+    }
+
+    .note {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 12px;
+        background: #FFF1E8;
+        border: 1px solid #F7DCCB;
+        font-size: 0.9rem;
+        color: #6B5145;
+    }
+
+    .note strong {
+        color: #9A3A19;
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+        border-bottom: 1px solid #F6E7DC;
+    }
+
+    .faq-item:last-child {
+        border-bottom: none;
+    }
+
+    .faq-item summary {
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        padding: 16px 32px 16px 0;
+        font-weight: 700;
+        font-size: 0.98rem;
+        color: var(--text);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-item summary::after {
+        content: "+";
+        position: absolute;
+        right: 4px;
+        top: 12px;
+        font-size: 1.3rem;
+        line-height: 1.4;
+        color: var(--coral);
+    }
+
+    .faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .faq-item p {
+        padding-bottom: 16px;
+        margin: 0;
+        color: #4C4039;
+        font-size: 0.94rem;
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+        margin-top: 40px;
+        border-top: 1px solid var(--line);
+        padding: 32px 0 40px;
+        font-size: 0.88rem;
+        color: var(--muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+    }
+
+    .footer-tools {
+        margin-bottom: 16px;
+        line-height: 1.8;
+    }
+
+    .footer-tools strong {
+        color: var(--text);
+    }
+
+    .site-footer a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .footer-note {
+        max-width: 68ch;
+        margin-bottom: 16px;
+    }
+
+    .footer-copy {
+        font-size: 0.82rem;
+        color: #A08C80;
+    }
+
+    @media (min-width: 560px) {
+        .form-grid {
+            grid-template-columns: 1.2fr 1fr;
+            align-items: start;
+        }
+
+        .form-grid .btn,
+        .form-grid .form-note {
+            grid-column: 1 / -1;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+    }
+
+    @media (min-width: 720px) {
+        .hero {
+            padding: 48px 0 24px;
+        }
+
+        .calc-card,
+        .content {
+            padding: 32px;
+        }
+    }
+
+    .page-meta {
+        margin-top: 14px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+    }
+
+    .related {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .related a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 8px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .related a:hover {
+        border-color: var(--coral);
+    }
+
+    .footer-copy {
+        color: var(--muted);
+    }
+
+    .form-note a {
+        color: var(--coral-deep);
+        font-weight: 600;
+        text-underline-offset: 2px;
+    }
+
+    .field-pair {
+        display: grid;
+        gap: 12px;
+    }
+
+    .mode-fieldset {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 16px 16px;
+        margin: 0;
+        min-width: 0;
+    }
+
+    .mode-fieldset legend {
+        padding: 0 6px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+
+    .form-grid .mode-fieldset {
+        grid-column: 1 / -1;
+    }
+</style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="index.html">
+                <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                    <path d="M16 28.5c-1.2 0-10.5-6.2-10.5-13.4A6.1 6.1 0 0 1 16 10.6a6.1 6.1 0 0 1 10.5 4.5c0 7.2-9.3 13.4-10.5 13.4z" fill="#E8835A"/>
+                    <circle cx="16" cy="15.4" r="3.4" fill="#FFF8F3"/>
+                </svg>
+                <span>Early Pregnancy Tools</span>
+            </a>
+            <a class="nav-link" href="index.html">← All tools</a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section class="hero">
+            <p class="eyebrow">Early pregnancy tool</p>
+            <h1>hCG Doubling Calculator</h1>
+            <p class="lede">Enter two hCG results with the date and time each sample was taken. The calculator shows the interval, the percentage change, the doubling time and the rise projected over 48 hours — with the source for the threshold it uses.</p>
+            <p class="page-meta">Last updated: <time datetime="2026-11-11">November 11, 2026</time></p>
+        </section>
+
+        <section class="calc-card" aria-labelledby="calc-heading">
+            <h2 id="calc-heading" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Enter your details</h2>
+            <form id="calcForm" novalidate>
+                <div class="form-grid">
+                    <fieldset class="mode-fieldset">
+                        <legend>First hCG result</legend>
+                        <div class="field">
+                            <label for="hcg1">hCG value (mIU/mL)</label>
+                            <input type="number" id="hcg1" name="hcg1" min="1" step="0.1" inputmode="decimal" placeholder="e.g. 1200" required>
+                        </div>
+                        <div class="field-pair" style="margin-top:12px;">
+                            <div class="field">
+                                <label for="date1">Date taken</label>
+                                <input type="date" id="date1" name="date1" required>
+                            </div>
+                            <div class="field">
+                                <label for="time1">Time taken</label>
+                                <input type="time" id="time1" name="time1" required>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="mode-fieldset">
+                        <legend>Second hCG result</legend>
+                        <div class="field">
+                            <label for="hcg2">hCG value (mIU/mL)</label>
+                            <input type="number" id="hcg2" name="hcg2" min="1" step="0.1" inputmode="decimal" placeholder="e.g. 1850" required>
+                        </div>
+                        <div class="field-pair" style="margin-top:12px;">
+                            <div class="field">
+                                <label for="date2">Date taken</label>
+                                <input type="date" id="date2" name="date2" required>
+                            </div>
+                            <div class="field">
+                                <label for="time2">Time taken</label>
+                                <input type="time" id="time2" name="time2" required>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <button type="submit" class="btn" id="calcBtn">Calculate my result</button>
+                    <p class="form-note">Use the values and times printed on your laboratory report. Results update automatically as you fill in the fields. Everything is calculated in your browser.</p>
+                </div>
+            </form>
+
+            <noscript>
+                <p class="error">This hCG calculator needs JavaScript. Please enable it in your browser and reload the page.</p>
+            </noscript>
+
+            <div class="error" id="errorBox" role="alert" hidden></div>
+
+            <section class="results" id="results" aria-live="polite" hidden>
+                <div class="result-hero">
+                    <p class="result-label" id="resultLabel">Projected rise over 48 hours</p>
+                    <p class="result-date" id="resultValue">—</p>
+                    <p class="result-sub" id="resultSub">—</p>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat">
+                        <p class="stat-label">Time between samples</p>
+                        <p class="stat-value" id="resultInterval">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Change between samples</p>
+                        <p class="stat-value" id="resultChange">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Doubling time</p>
+                        <p class="stat-value" id="resultDoubling">—</p>
+                    </div>
+                    <div class="stat">
+                        <p class="stat-label">Second ÷ first</p>
+                        <p class="stat-value" id="resultRatio">—</p>
+                    </div>
+                </div>
+
+                <div class="note" id="tierNote">
+                    <strong id="tierTitle">—</strong>
+                    <span id="tierText">—</span>
+                </div>
+
+                <p class="form-note">Threshold source: <a href="https://www.acog.org/clinical/guidance/practice-bulletin/2018/11/early-pregnancy-loss" rel="noopener">ACOG Practice Bulletin 200 — Early Pregnancy Loss (2018)</a>. This is information only. It cannot replace an assessment by your doctor or an ultrasound.</p>
+            </section>
+        </section>
+
+        <section class="content">
+            <h2>How this hCG calculator works</h2>
+            <p>The calculator uses only the two values and two times you enter. Here is the exact arithmetic behind every number it shows.</p>
+            <div class="formula">
+                Interval (hours) = second sample time − first sample time<br>
+                Change (%) = (hCG2 − hCG1) ÷ hCG1 × 100<br>
+                Doubling time (hours) = interval × ln(2) ÷ ln(hCG2 ÷ hCG1)<br>
+                Rise over 48 hours (%) = ((hCG2 ÷ hCG1)<sup>(48 ÷ interval)</sup> − 1) × 100
+            </div>
+            <ul>
+                <li><strong>Doubling time</strong> is shown only when the second value is higher than the first. If it is the same or lower, the page reports that there is no rise instead of returning a meaningless number.</li>
+                <li><strong>The 48-hour rise</strong> is projected from your real interval. A 30-hour gap and a 60-hour gap can then be compared on the same 48-hour scale. It is not calculated when the samples are less than an hour apart.</li>
+                <li><strong>Times are read as the clock times you enter.</strong> The two timestamps are subtracted directly, so a daylight-saving change cannot shift the interval by an hour.</li>
+                <li><strong>Units are not converted.</strong> Enter mIU/mL as printed on your report, and use results from the same laboratory wherever possible.</li>
+                <li><strong>No number is invented.</strong> Missing values, values that are not greater than zero, and a second sample dated before the first all produce an error message instead of a result.</li>
+            </ul>
+        </section>
+
+        <section class="content">
+            <h2>What hCG does in early pregnancy</h2>
+            <p>In early pregnancy hCG roughly doubles every 48 to 72 hours (ACOG Practice Bulletin 200, 2018). As the pregnancy advances, the rate of increase slows, so the same percentage rise is not expected at every stage.</p>
+            <p>Normal hCG values cover a very wide range at any given week. Two people at the same stage of pregnancy can have values that differ by a large factor, which is why a single number — however high or low — cannot tell you how a pregnancy is progressing or where it is located.</p>
+            <p>Different laboratories may use different assays, units or reference ranges. Results from two different laboratories should not be compared with each other as if they came from the same test; serial values are usually interpreted within one laboratory.</p>
+            <p>An ultrasound is the key test for confirming where a pregnancy is developing and how it is progressing. hCG values are read alongside imaging and your history, not instead of them.</p>
+        </section>
+
+        <section class="content">
+            <h2>What the 35% figure means — and what it does not</h2>
+            <p>ACOG Practice Bulletin 200 (2018) describes a rise of at least 35% over 48 hours as the lower limit of what is expected in a normal early pregnancy. This page uses that single published figure and labels which side of it your projected rise falls on.</p>
+            <ul>
+                <li><strong>At or above 35%.</strong> The page says your rise is at or above that lower limit. It does not say the pregnancy is healthy, correctly located, or certain to continue. A pair of values cannot show any of those things.</li>
+                <li><strong>Below 35%.</strong> The page says your rise is slower than that lower limit and that a doctor should assess you, usually with an ultrasound. It does not mean a miscarriage is happening.</li>
+                <li><strong>No rise.</strong> If the second value is the same or lower, the page says there is no rise and points you to a clinician. It does not interpret what that pattern means.</li>
+            </ul>
+            <p>We do not use hCG to date a pregnancy, to diagnose a miscarriage, or to rule out an ectopic pregnancy. Those decisions need a clinician, your history and imaging.</p>
+            <div class="note">
+                <strong>Not medical advice.</strong> Early Pregnancy Tools is an educational calculator. It cannot diagnose a pregnancy, confirm that a pregnancy is progressing normally, or detect a problem. Always rely on your doctor, midwife or emergency service for medical decisions.
+            </div>
+        </section>
+
+        <section class="content">
+            <h2>When to contact a clinician</h2>
+            <p>Do not wait for a calculator result if you have symptoms that worry you. Contact your maternity service, doctor or emergency service straight away if you have:</p>
+            <ul>
+                <li>Pain in your lower abdomen, especially if it is one-sided or severe, or pain at the tip of your shoulder.</li>
+                <li>Vaginal bleeding, particularly with pain or dizziness.</li>
+                <li>Feeling faint, dizzy or unwell.</li>
+                <li>Any symptom that frightens you, even if your hCG result looks reassuring on this page.</li>
+            </ul>
+            <p>If your two results came from different laboratories, ask your doctor whether the same assay was used, because values from different methods may not be directly comparable.</p>
+        </section>
+
+        <section class="content" id="faq">
+            <h2>Frequently asked questions</h2>
+            <details class="faq-item">
+                <summary>What is hCG doubling time?</summary>
+                <p>Doubling time is the number of hours hCG would need to double if it kept rising at the same rate as it did between your two samples. This page calculates it as interval in hours multiplied by ln(2), divided by ln(second value divided by first value). It is only shown when the second value is higher than the first.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What rise is expected over 48 hours?</summary>
+                <p>In early pregnancy hCG usually doubles roughly every 48 to 72 hours, and the rise slows as the pregnancy advances. ACOG Practice Bulletin 200 (2018) describes a rise of at least 35% over 48 hours as the lower limit expected in a normal early pregnancy. Normal values vary widely, so a result above or below that line is not a diagnosis.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can a single hCG level tell me if my pregnancy is OK?</summary>
+                <p>No. Normal hCG values cover a very wide range at any given week, so one number — however high or low — cannot show how a pregnancy is progressing or where it is located. An ultrasound is the key test for confirming the location and development of a pregnancy, and hCG values are interpreted alongside it.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Why is there no doubling time in my result?</summary>
+                <p>The calculator only shows a doubling time when the second hCG value is higher than the first. If the second value is the same or lower, it reports that there is no rise rather than producing a misleading number. That pattern needs to be assessed by a doctor, usually with an ultrasound.</p>
+            </details>
+        </section>
+
+        <section class="content">
+            <h2>Sources and disclaimer</h2>
+            <p>Primary sources used for the method and the threshold on this page:</p>
+            <ul>
+                <li><a href="https://www.acog.org/clinical/guidance/practice-bulletin/2018/11/early-pregnancy-loss" rel="noopener">ACOG Practice Bulletin 200 — Early Pregnancy Loss (2018)</a>, the source of the 35% lower limit over 48 hours and of the statement that hCG roughly doubles every 48 to 72 hours in early pregnancy.</li>
+                <li><a href="https://www.acog.org/womens-health/faqs/early-pregnancy-loss" rel="noopener">ACOG — Early Pregnancy Loss patient FAQ</a> (American College of Obstetricians and Gynecologists).</li>
+                <li><a href="https://www.nhs.uk/conditions/ectopic-pregnancy/" rel="noopener">NHS — Ectopic pregnancy</a>, for the symptoms that need urgent medical attention.</li>
+                <li><a href="https://www.nhs.uk/conditions/miscarriage/" rel="noopener">NHS — Miscarriage</a> (UK National Health Service).</li>
+            </ul>
+            <p>This page is informational only and is not a medical device. It does not create a clinician–patient relationship and must not be used to make medical decisions. hCG results are interpreted by a clinician together with your history and an ultrasound.</p>
+            <p>Your values and dates are processed only in this browser tab. Nothing is uploaded, stored or shared.</p>
+        </section>
+
+        <section class="content">
+            <h2>Related tools</h2>
+            <p>If you already have a due date, the <a href="due-date-calculator.html">due date calculator</a> shows your current gestational age and the milestone dates ahead. The <a href="implantation-calculator.html">implantation calculator</a> estimates when implantation may have happened after ovulation.</p>
+            <div class="related">
+                <a href="index.html">All tools</a>
+                <a href="due-date-calculator.html">Due Date Calculator</a>
+                <a href="implantation-calculator.html">Implantation Calculator</a>
+                <a href="ivf-due-date-calculator.html">IVF Due Date Calculator</a>
+                <a href="contraction-timer.html">Contraction Timer</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <p class="footer-links">
+                <a href="about.html">About</a>
+                <a href="editorial-policy.html">Editorial policy</a>
+                <a href="privacy.html">Privacy</a>
+            </p>
+            <p class="footer-tools"><strong>Tools:</strong> <a href="due-date-calculator.html">Due Date Calculator</a> · <a href="ovulation-calculator.html">Ovulation Calculator</a> · <a href="conception-date-calculator.html">Conception Date Calculator</a> · <a href="implantation-calculator.html">Implantation Calculator</a> · <a href="hcg-doubling-calculator.html">hCG Doubling Calculator</a> · <a href="ivf-due-date-calculator.html">IVF Due Date Calculator</a> · <a href="contraction-timer.html">Contraction Timer</a> · <a href="corrected-age-calculator.html">Corrected Age Calculator</a> · <a href="index.html">All tools home</a></p>
+            <p class="footer-note">Early Pregnancy Tools is an independent educational project. This hCG calculator is not a medical device and does not replace advice from your doctor or midwife. If you are worried about your pregnancy, contact a healthcare professional.</p>
+            <p class="footer-copy">&copy; 2026 Early Pregnancy Tools</p>
+        </div>
+    </footer>
+
+<script>
+    'use strict';
+
+    var MS_PER_DAY = 86400000;
+    var HOUR_MS = 3600000;
+    var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    function pad2(n) {
+        return n < 10 ? '0' + n : String(n);
+    }
+
+    // Strict YYYY-MM-DD parse. The round-trip check rejects dates such as 2026-02-29.
+    function parseISODate(iso) {
+        if (typeof iso !== 'string') { return null; }
+        var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+        if (!m) { return null; }
+        var y = Number(m[1]);
+        var mo = Number(m[2]);
+        var d = Number(m[3]);
+        if (mo < 1 || mo > 12 || d < 1 || d > 31) { return null; }
+        var serial = Date.UTC(y, mo - 1, d) / MS_PER_DAY;
+        var back = new Date(serial * MS_PER_DAY);
+        if (back.getUTCFullYear() !== y || back.getUTCMonth() !== mo - 1 || back.getUTCDate() !== d) {
+            return null;
+        }
+        return { serial: serial, y: y, m: mo, d: d };
+    }
+
+    function parseClock(value) {
+        if (typeof value !== 'string') { return null; }
+        var m = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(value.trim());
+        if (!m) { return null; }
+        var hh = Number(m[1]);
+        var mm = Number(m[2]);
+        var ss = m[3] ? Number(m[3]) : 0;
+        if (hh > 23 || mm > 59 || ss > 59) { return null; }
+        return { hh: hh, mm: mm, ss: ss };
+    }
+
+    function formatLongDate(serial) {
+        var d = new Date(serial * MS_PER_DAY);
+        return MONTH_NAMES[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+    }
+
+    function toNumber(value) {
+        if (typeof value === 'number') { return value; }
+        if (typeof value === 'string' && value.trim() !== '') { return Number(value.trim()); }
+        return NaN;
+    }
+
+    // Pure calculation. Times are wall-clock values, combined with Date.UTC so the
+    // interval is exactly the difference the user sees on the clock.
+    function calculate(params) {
+        var d1 = parseISODate(params.date1);
+        var d2 = parseISODate(params.date2);
+        var t1 = parseClock(params.time1);
+        var t2 = parseClock(params.time2);
+        if (!d1 || !d2) {
+            return { ok: false, error: 'Please enter a real calendar date for both samples.' };
+        }
+        if (!t1 || !t2) {
+            return { ok: false, error: 'Please enter the time each sample was taken.' };
+        }
+        var v1 = toNumber(params.hcg1);
+        var v2 = toNumber(params.hcg2);
+        if (!isFinite(v1) || !isFinite(v2) || v1 <= 0 || v2 <= 0) {
+            return { ok: false, error: 'Both hCG values must be numbers greater than zero.' };
+        }
+        var ms1 = Date.UTC(d1.y, d1.m - 1, d1.d, t1.hh, t1.mm, t1.ss);
+        var ms2 = Date.UTC(d2.y, d2.m - 1, d2.d, t2.hh, t2.mm, t2.ss);
+        var intervalHours = (ms2 - ms1) / HOUR_MS;
+        if (intervalHours <= 0) {
+            return { ok: false, error: 'The second sample must be taken after the first. Please check the dates and times.' };
+        }
+        var ratio = v2 / v1;
+        var percentChange = (ratio - 1) * 100;
+        var doublingHours = v2 > v1 ? intervalHours * Math.LN2 / Math.log(ratio) : null;
+        var rise48 = intervalHours >= 1 ? (Math.pow(ratio, 48 / intervalHours) - 1) * 100 : null;
+
+        return {
+            ok: true,
+            hcg1: v1,
+            hcg2: v2,
+            firstLabel: formatLongDate(d1.serial),
+            secondLabel: formatLongDate(d2.serial),
+            intervalHours: intervalHours,
+            percentChange: percentChange,
+            ratio: ratio,
+            doublingHours: doublingHours,
+            rise48: rise48
+        };
+    }
+
+    function fmtPercent(n) {
+        return (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+    }
+
+    function fmtInterval(hours) {
+        if (hours < 1) {
+            return Math.round(hours * 60) + ' minutes';
+        }
+        return hours.toFixed(1) + ' hours';
+    }
+
+    function fmtDoubling(hours) {
+        if (hours === null) { return 'No rise'; }
+        if (hours < 48) { return hours.toFixed(1) + ' hours'; }
+        return (hours / 24).toFixed(1) + ' days';
+    }
+
+    function fmtValue(value) {
+        return Number(value.toFixed(1)).toLocaleString('en-US');
+    }
+
+    function tierFor(result) {
+        if (result.hcg2 <= result.hcg1) {
+            return {
+                title: 'No rise between the two results',
+                text: 'The second value is not higher than the first. hCG that does not rise needs to be assessed by a doctor, usually with an ultrasound. This page cannot tell you what it means.'
+            };
+        }
+        if (result.rise48 === null) {
+            return {
+                title: 'Too close together to project 48 hours',
+                text: 'Your two samples were taken less than an hour apart, so a 48-hour projection would not be meaningful. Ask your doctor whether the timing of the samples is usable.'
+            };
+        }
+        if (result.rise48 >= 35) {
+            return {
+                title: 'At or above the 35% lower limit',
+                text: 'A rise of at least 35% over 48 hours is the lower limit given in ACOG Practice Bulletin 200 (2018). Being at or above it is not proof that everything is fine: a pair of values cannot confirm where the pregnancy is or whether it will continue.'
+            };
+        }
+        return {
+            title: 'Below the 35% lower limit',
+            text: 'Your projected 48-hour rise is below the 35% lower limit given in ACOG Practice Bulletin 200 (2018). That is a reason for a doctor to assess you, usually with an ultrasound. It is not a diagnosis of miscarriage or of an ectopic pregnancy.'
+        };
+    }
+
+    // ---------- UI wiring ----------
+    var form = document.getElementById('calcForm');
+    var hcg1Input = document.getElementById('hcg1');
+    var hcg2Input = document.getElementById('hcg2');
+    var date1Input = document.getElementById('date1');
+    var date2Input = document.getElementById('date2');
+    var time1Input = document.getElementById('time1');
+    var time2Input = document.getElementById('time2');
+    var errorBox = document.getElementById('errorBox');
+    var resultsBox = document.getElementById('results');
+
+    function showError(message) {
+        errorBox.textContent = message;
+        errorBox.hidden = false;
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.hidden = true;
+    }
+
+    function clearResults() {
+        resultsBox.hidden = true;
+    }
+
+    function render(result) {
+        var tier = tierFor(result);
+        var label = result.rise48 !== null ? 'Projected rise over 48 hours' : 'Change between your two results';
+        var value = result.rise48 !== null ? fmtPercent(result.rise48) : fmtPercent(result.percentChange);
+
+        document.getElementById('resultLabel').textContent = label;
+        document.getElementById('resultValue').textContent = value;
+        document.getElementById('resultSub').textContent = 'hCG ' + fmtValue(result.hcg1) + ' → ' + fmtValue(result.hcg2) + ' mIU/mL over ' + fmtInterval(result.intervalHours) + '.';
+        document.getElementById('resultInterval').textContent = fmtInterval(result.intervalHours);
+        document.getElementById('resultChange').textContent = fmtPercent(result.percentChange);
+        document.getElementById('resultDoubling').textContent = fmtDoubling(result.doublingHours);
+        document.getElementById('resultRatio').textContent = result.ratio.toFixed(2) + '\u00D7';
+        document.getElementById('tierTitle').textContent = tier.title;
+        document.getElementById('tierText').textContent = tier.text;
+
+        resultsBox.hidden = false;
+    }
+
+    function update(showErrors) {
+        var values = {
+            hcg1: hcg1Input.value,
+            hcg2: hcg2Input.value,
+            date1: date1Input.value,
+            date2: date2Input.value,
+            time1: time1Input.value,
+            time2: time2Input.value
+        };
+        var complete = values.hcg1 && values.hcg2 && values.date1 && values.date2 && values.time1 && values.time2;
+        if (!complete) {
+            clearResults();
+            if (showErrors) {
+                showError('Please enter both hCG results with the date and time each sample was taken.');
+            } else {
+                hideError();
+            }
+            return;
+        }
+        var result = calculate(values);
+        if (!result.ok) {
+            clearResults();
+            showError(result.error);
+            return;
+        }
+        hideError();
+        render(result);
+    }
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        update(true);
+    });
+
+    var inputs = [hcg1Input, hcg2Input, date1Input, date2Input, time1Input, time2Input];
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('input', function () { update(false); });
+        inputs[i].addEventListener('change', function () { update(true); });
+    }
+
+    if (hcg1Input.value && hcg2Input.value && date1Input.value && date2Input.value && time1Input.value && time2Input.value) {
+        update(false);
+    }
+</script>
+</body>
+</html>
